@@ -31,9 +31,18 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="decomposicaoLU.c">
+			<Option compilerVar="CC" />
+			<Option target="Debug" />
+		</Unit>
+		<Unit filename="decomposicaoLU.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="montaMatrizQuadrada.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="montaMatrizQuadrada.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
