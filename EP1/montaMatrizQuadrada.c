@@ -6,7 +6,7 @@
 
 
 //MontaMatrizQuadrada retorna um ponteiro para a matriz lida
-float** montaMatrizQuadrada(){
+float** montaMatrizQuadrada(int* tam){
     FILE *input;
     FILE *outputFile1;
 
@@ -37,6 +37,7 @@ float** montaMatrizQuadrada(){
         //le ordem da matriz
         fscanf(input,"%i",&n);
         //aloca a matriz
+
         matriz = (float **)malloc(n * sizeof(int*));
         for(i = 0; i < n; i++)
             matriz[i] = (float *)malloc(n * sizeof(int));
@@ -66,7 +67,7 @@ float** montaMatrizQuadrada(){
             k=0;
         }
         printf("\n\n");
-
+        *tam = n;
     }
     return matriz;
 }

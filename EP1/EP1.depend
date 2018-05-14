@@ -1,18 +1,19 @@
 # depslib dependency file v1.0
-1526003646 source:c:\users\brenobsk\desktop\numericoep1\ep1\main.c
+1526306437 source:c:\users\brenobsk\desktop\numericoep1\ep1\main.c
 	<stdio.h>
 	<stdlib.h>
 	"montaMatrizQuadrada.h"
+	"decomposicaoLU.h"
 
-1526003273 c:\users\brenobsk\desktop\numericoep1\ep1\montamatrizquadrada.h
+1526303162 c:\users\brenobsk\desktop\numericoep1\ep1\montamatrizquadrada.h
 
-1526003297 source:c:\users\brenobsk\desktop\numericoep1\ep1\montamatrizquadrada.c
+1526303158 source:c:\users\brenobsk\desktop\numericoep1\ep1\montamatrizquadrada.c
 	<stdio.h>
 	<stdlib.h>
 	<stdbool.h>
 	"montaMatrizQuadrada.h"
 
-1526004153 source:c:\users\brenobsk\desktop\numericoep1\ep1\decomposicaolu.c
+1526306352 source:c:\users\brenobsk\desktop\numericoep1\ep1\decomposicaolu.c
 	<stdio.h>
 	"decomposicaoLU.h"
 

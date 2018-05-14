@@ -7,10 +7,10 @@
 int main(){
     float** A;
     float*  pB;
-    float B[4] = {1, 2, 3, 4};
-
+    float B[3] = {4, 0.5, 1.5};
+    int n;
     pB = B;
-    A = montaMatrizQuadrada();
-    decomposicaoLU(A, pB, 4);
+    A = montaMatrizQuadrada(&n);
+    decomposicaoLU(A, B, n);
     return 0;
 }
