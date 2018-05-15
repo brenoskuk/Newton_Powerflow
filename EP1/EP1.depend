@@ -1,21 +1,29 @@
 # depslib dependency file v1.0
-1526306437 source:c:\users\brenobsk\desktop\numericoep1\ep1\main.c
+1526353146 source:c:\users\brenobsk\desktop\numericoep1\ep1\main.c
 	<stdio.h>
 	<stdlib.h>
 	"montaMatrizQuadrada.h"
+	"montaVetor.h"
 	"decomposicaoLU.h"
 
-1526303162 c:\users\brenobsk\desktop\numericoep1\ep1\montamatrizquadrada.h
+1526347234 c:\users\brenobsk\desktop\numericoep1\ep1\montamatrizquadrada.h
 
-1526303158 source:c:\users\brenobsk\desktop\numericoep1\ep1\montamatrizquadrada.c
+1526347264 source:c:\users\brenobsk\desktop\numericoep1\ep1\montamatrizquadrada.c
 	<stdio.h>
 	<stdlib.h>
 	<stdbool.h>
 	"montaMatrizQuadrada.h"
 
-1526306352 source:c:\users\brenobsk\desktop\numericoep1\ep1\decomposicaolu.c
+1526352899 source:c:\users\brenobsk\desktop\numericoep1\ep1\decomposicaolu.c
 	<stdio.h>
-	"decomposicaoLU.h"
 
-1526004116 c:\users\brenobsk\desktop\numericoep1\ep1\decomposicaolu.h
+1526346349 c:\users\brenobsk\desktop\numericoep1\ep1\decomposicaolu.h
+
+1526347184 source:c:\users\brenobsk\desktop\numericoep1\ep1\montavetor.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	"montaVetor.h"
+
+1526347133 c:\users\brenobsk\desktop\numericoep1\ep1\montavetor.h
 

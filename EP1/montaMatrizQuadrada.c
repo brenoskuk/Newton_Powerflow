@@ -6,24 +6,20 @@
 
 
 //MontaMatrizQuadrada retorna um ponteiro para a matriz lida
-float** montaMatrizQuadrada(int* tam){
+float** montaMatrizQuadrada(char fileName[100], int* tam){
     FILE *input;
-    FILE *outputFile1;
 
     float **matriz;
-    int i,j,k;
+    int i,j;
 
     int n;
 
-    char fileName[100];
     bool fileFound  = false;
     bool teste      = true;
 
-    int sum=0;
 
-
-    printf("Entre com o nome do arquivo (extensao incluida):  ");
-    scanf("%[^\n]%*c",fileName);
+    //printf("Entre com o nome do arquivo (extensao incluida):  ");
+    //scanf("%[^\n]%*c", fileName);
     input = fopen(fileName,"r");
     if(input){
         fileFound=true;
@@ -54,8 +50,8 @@ float** montaMatrizQuadrada(int* tam){
 
         i=0;
         j=0;
-        printf("\n\n");
         if (teste){
+            printf("\n\n");
             //printa a matriz (para testes apenas)
             for(i=0;i<n;i++){
                 for(j=0;j<n;j++){
@@ -64,7 +60,7 @@ float** montaMatrizQuadrada(int* tam){
                 printf("\n");
             }
             i=0;
-            k=0;
+            j=0;
         }
         printf("\n\n");
         *tam = n;

@@ -2,15 +2,28 @@
 #include <stdlib.h>
 
 #include "montaMatrizQuadrada.h"
+#include "montaVetor.h"
 #include "decomposicaoLU.h"
 
-int main(){
+int main()
+{
     float** A;
-    float*  pB;
-    float B[3] = {4, 0.5, 1.5};
-    int n;
-    pB = B;
-    A = montaMatrizQuadrada(&n);
-    decomposicaoLU(A, B, n);
+    float* B;
+    int ordemA, ordemB;
+    char enderecoA[]="../matrizes/matrizA2.txt";
+    char enderecoB[]="../matrizes/vetorB2.txt";
+
+    A = montaMatrizQuadrada(enderecoA, &ordemA);
+    B = montaVetor(enderecoB, &ordemB);
+
+    if (ordemA = ordemB)
+    {
+        decomposicaoLU(A, B, ordemA);
+    }
+    else
+    {
+        printf("\n Valores fornecidas invalidas...");
+    }
+
     return 0;
 }

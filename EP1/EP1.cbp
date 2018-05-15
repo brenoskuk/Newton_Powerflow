@@ -43,6 +43,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="montaMatrizQuadrada.h" />
+		<Unit filename="montaVetor.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="montaVetor.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

@@ -1,8 +1,7 @@
 #include<stdio.h>
 
-#include "decomposicaoLU.h"
-
-void decomposicaoLU(float **A, float*B, int n){
+void decomposicaoLU(float **A, float*B, int n)
+{
     float L[20][20]= {0}, U[20][20];
     float X[20]= {0},Y[20]= {0};
     int i,j,k;
@@ -14,7 +13,7 @@ void decomposicaoLU(float **A, float*B, int n){
             if(i<=j)
             {
                 U[i][j]=A[i][j];
-                for(k=0; k<i-1; k++)
+                for(k=0; k<=i-1; k++)
                     U[i][j]-=L[i][k]*U[k][j];
                 if(i==j)
                     L[i][j]=1;
@@ -72,4 +71,5 @@ void decomposicaoLU(float **A, float*B, int n){
     {
         printf("%9.3f",X[i]);
     }
+
 }
