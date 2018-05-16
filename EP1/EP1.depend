@@ -27,3 +27,31 @@
 
 1526347133 c:\users\brenobsk\desktop\numericoep1\ep1\montavetor.h
 
+1526445589 source:c:\users\breno\desktop\numericoep1\ep1\decomposicaolu.c
+	<stdio.h>
+
+1526442278 source:c:\users\breno\desktop\numericoep1\ep1\main.c
+	<stdio.h>
+	<stdlib.h>
+	"montaMatrizQuadrada.h"
+	"montaVetor.h"
+	"decomposicaoLU.h"
+
+1526395079 c:\users\breno\desktop\numericoep1\ep1\montamatrizquadrada.h
+
+1526395079 c:\users\breno\desktop\numericoep1\ep1\montavetor.h
+
+1526442271 c:\users\breno\desktop\numericoep1\ep1\decomposicaolu.h
+
+1526395079 source:c:\users\breno\desktop\numericoep1\ep1\montamatrizquadrada.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	"montaMatrizQuadrada.h"
+
+1526395079 source:c:\users\breno\desktop\numericoep1\ep1\montavetor.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	"montaVetor.h"
+
