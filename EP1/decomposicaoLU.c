@@ -2,7 +2,7 @@
 //Codigo da decomposicao LU com pivotamento como sugerido
 //no enunciado do EP
 
-float modulo(float val) {
+double modulo(double val) {
   if (val < 0) {
     return -val;
   }
@@ -11,15 +11,15 @@ float modulo(float val) {
   }
 }
 
-void decomposicaoLU(float **A, int *P, int n)
+void decomposicaoLU(double **A, double *B, int *P, int n)
 {
-    float temp;
+    double temp;
     int i,j,k,l;
     for(k=0; k<n; k++)
     {
         for(i=k; i<n; i++)
         {
-            float sum = 0;
+            double sum = 0;
             for (j=0; j<k; j++)
             {
                 sum = sum + A[i][j]*A[j][k];
@@ -40,7 +40,7 @@ void decomposicaoLU(float **A, int *P, int n)
         P[k] = l;
         if(P[k] != k)
         {
-            //troca de linha de A:
+            //troca de linha de A e B:
              for(j=0; j<n; j++)
              {
                  temp = A[k][j];
@@ -52,7 +52,7 @@ void decomposicaoLU(float **A, int *P, int n)
         //Fim da pivotacao
         for(j=k+1; j<n; j++)
         {
-            float sum = 0;
+            double sum = 0;
             for (i=0; i<k; i++)
             {
                 sum = sum + A[k][i]*A[i][j];
@@ -74,6 +74,13 @@ void decomposicaoLU(float **A, int *P, int n)
     for(i=0; i<n; i++)
     {
         printf("%d ",P[i]);
+    }
+    printf("\n");
+
+    printf("[B]: \n");
+    for(i=0; i<n; i++)
+    {
+        printf("%lf ",B[i]);
     }
     printf("\n");
 

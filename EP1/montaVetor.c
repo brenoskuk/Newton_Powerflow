@@ -6,11 +6,11 @@
 
 
 //MontaMatrizVetor retorna um ponteiro para o vetor lido
-float* montaVetor(char fileName[100], int* tam){
+double* montaVetor(char fileName[100], int* tam){
     FILE *input;
 
 
-    float *vetor;
+    double *vetor;
     int i;
     int n;
     bool fileFound  = false;
@@ -32,11 +32,11 @@ float* montaVetor(char fileName[100], int* tam){
         fscanf(input,"%i",&n);
         //aloca o tamanho do vetor
 
-        vetor = (float *)malloc(n * sizeof(float*));
+        vetor = (double *)malloc(n * sizeof(double*));
 
         while(!feof(input)){
             for(i=0;i<n;i++){
-                fscanf(input, "%f", &vetor[i]);
+                fscanf(input, "%lf", &vetor[i]);
                 }
             }
         }
@@ -47,7 +47,7 @@ float* montaVetor(char fileName[100], int* tam){
             printf("\n\n");
             //printa o vetor (para testes apenas)
             for(i=0;i<n;i++){
-                printf("%f\t",vetor[i]);
+                printf("%4lf\t",vetor[i]);
             }
             printf("\n");
 

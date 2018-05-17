@@ -1,7 +1,7 @@
 #ifndef RESOLVESISLIN_H_INCLUDED
 #define RESOLVESISLIN_H_INCLUDED
 
-void resolveSisLin(float **A, float *B, int n);
+void resolveSisLinPermutado(double **A, double *B, int *P, int n);
 
 
 #endif // RESOLVESISLIN_H_INCLUDED

@@ -6,10 +6,10 @@
 
 
 //MontaMatrizQuadrada retorna um ponteiro para a matriz lida
-float** montaMatrizQuadrada(char fileName[100], int* tam){
+double** montaMatrizQuadrada(char fileName[100], int* tam){
     FILE *input;
 
-    float **matriz;
+    double **matriz;
     int i,j;
 
     int n;
@@ -34,16 +34,16 @@ float** montaMatrizQuadrada(char fileName[100], int* tam){
         fscanf(input,"%i",&n);
         //aloca a matriz
 
-        matriz = (float **)malloc(n * sizeof(int*));
+        matriz = (double **)malloc(n * sizeof(double*));
         for(i = 0; i < n; i++)
-            matriz[i] = (float *)malloc(n * sizeof(int));
+            matriz[i] = (double *)malloc(n * sizeof(double));
 
         i=0;
 
         while(!feof(input)){
             for(i=0;i<n;i++){
                 for(j=0;j<n;j++){
-                    fscanf(input, "%f", &matriz[i][j]);
+                    fscanf(input, "%lf", &matriz[i][j]);
                 }
             }
         }
@@ -55,7 +55,7 @@ float** montaMatrizQuadrada(char fileName[100], int* tam){
             //printa a matriz (para testes apenas)
             for(i=0;i<n;i++){
                 for(j=0;j<n;j++){
-                    printf("%f\t",matriz[i][j]);
+                    printf("%4lf\t",matriz[i][j]);
                 }
                 printf("\n");
             }

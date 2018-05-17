@@ -8,8 +8,8 @@
 
 int main()
 {
-    float **A;
-    float *B, *P, *X;
+    double **A;
+    double *B, *P, *X;
 
     int ordemA, ordemB;
 
@@ -19,12 +19,13 @@ int main()
     A = montaMatrizQuadrada(enderecoA, &ordemA);
     B = montaVetor(enderecoB, &ordemB);
     P = (int *)malloc(ordemA * sizeof(int*));
-    X = (float *)malloc(ordemA * sizeof(float*));
+    X = (double *)malloc(ordemA * sizeof(double*));
     if (ordemA = ordemB)
     {
         //Aloca a memoria para o vetor de pivos
-        decomposicaoLU(A, P,ordemA);
-        resolveSisLin(A, B, ordemA);
+        decomposicaoLU(A, B, P,ordemA);
+        //Note que B esta permutada
+        resolveSisLinPermutado(A, B, P, ordemA);
     }
     else
     {
