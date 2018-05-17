@@ -4,11 +4,13 @@
 #include "montaMatrizQuadrada.h"
 #include "montaVetor.h"
 #include "decomposicaoLU.h"
+#include "resolveSisLin.h"
 
 int main()
 {
     float **A;
-    float *B, *P;
+    float *B, *P, *X;
+
     int ordemA, ordemB;
 
     char enderecoA[]="../matrizes/matrizA2.txt";
@@ -17,10 +19,12 @@ int main()
     A = montaMatrizQuadrada(enderecoA, &ordemA);
     B = montaVetor(enderecoB, &ordemB);
     P = (int *)malloc(ordemA * sizeof(int*));
+    X = (float *)malloc(ordemA * sizeof(float*));
     if (ordemA = ordemB)
     {
         //Aloca a memoria para o vetor de pivos
-        decomposicaoLU(A, B, P,ordemA);
+        decomposicaoLU(A, P,ordemA);
+        resolveSisLin(A, B, ordemA);
     }
     else
     {

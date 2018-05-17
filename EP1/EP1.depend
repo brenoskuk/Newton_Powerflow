@@ -27,21 +27,22 @@
 
 1526347133 c:\users\brenobsk\desktop\numericoep1\ep1\montavetor.h
 
-1526445589 source:c:\users\breno\desktop\numericoep1\ep1\decomposicaolu.c
+1526486439 source:c:\users\breno\desktop\numericoep1\ep1\decomposicaolu.c
 	<stdio.h>
 
-1526442278 source:c:\users\breno\desktop\numericoep1\ep1\main.c
+1526487830 source:c:\users\breno\desktop\numericoep1\ep1\main.c
 	<stdio.h>
 	<stdlib.h>
 	"montaMatrizQuadrada.h"
 	"montaVetor.h"
 	"decomposicaoLU.h"
+	"resolveSisLin.h"
 
 1526395079 c:\users\breno\desktop\numericoep1\ep1\montamatrizquadrada.h
 
 1526395079 c:\users\breno\desktop\numericoep1\ep1\montavetor.h
 
-1526442271 c:\users\breno\desktop\numericoep1\ep1\decomposicaolu.h
+1526486067 c:\users\breno\desktop\numericoep1\ep1\decomposicaolu.h
 
 1526395079 source:c:\users\breno\desktop\numericoep1\ep1\montamatrizquadrada.c
 	<stdio.h>
@@ -49,9 +50,14 @@
 	<stdbool.h>
 	"montaMatrizQuadrada.h"
 
-1526395079 source:c:\users\breno\desktop\numericoep1\ep1\montavetor.c
+1526487900 source:c:\users\breno\desktop\numericoep1\ep1\montavetor.c
 	<stdio.h>
 	<stdlib.h>
 	<stdbool.h>
 	"montaVetor.h"
+
+1526487837 c:\users\breno\desktop\numericoep1\ep1\resolvesislin.h
+
+1526488060 source:c:\users\breno\desktop\numericoep1\ep1\resolvesislin.c
+	<stdio.h>
 

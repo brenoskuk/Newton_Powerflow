@@ -11,11 +11,8 @@ float modulo(float val) {
   }
 }
 
-void decomposicaoLU(float **A, float *B, int *P, int n)
+void decomposicaoLU(float **A, int *P, int n)
 {
-    P[0] = 10;
-    float L[20][20]= {0}, U[20][20];
-    float X[20]= {0},Y[20]= {0};
     float temp;
     int i,j,k,l;
     for(k=0; k<n; k++)
@@ -79,23 +76,6 @@ void decomposicaoLU(float **A, float *B, int *P, int n)
         printf("%d ",P[i]);
     }
     printf("\n");
-    /**
-    printf("[L]: \n");
-    for(i=0; i<n; i++)
-    {
-        for(j=0; j<n; j++)
-            printf("%9.3f",L[i][j]);
-        printf("\n");
-    }
-    printf("\n\n[U]: \n");
-    for(i=0; i<n; i++)
-    {
-        for(j=0; j<n; j++)
-            printf("%9.3f",U[i][j]);
-        printf("\n");
-    }
-    **/
-
 
 
 }

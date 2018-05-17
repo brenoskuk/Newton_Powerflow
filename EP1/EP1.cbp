@@ -47,6 +47,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="montaVetor.h" />
+		<Unit filename="resolveSisLin.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="resolveSisLin.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

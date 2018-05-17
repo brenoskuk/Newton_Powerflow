@@ -32,7 +32,7 @@ float* montaVetor(char fileName[100], int* tam){
         fscanf(input,"%i",&n);
         //aloca o tamanho do vetor
 
-        vetor = (float *)malloc(n * sizeof(int*));
+        vetor = (float *)malloc(n * sizeof(float*));
 
         while(!feof(input)){
             for(i=0;i<n;i++){
