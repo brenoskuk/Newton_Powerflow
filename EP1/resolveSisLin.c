@@ -3,10 +3,9 @@
 respectiva matriz B permutada. Ao fim do algoritmo
 a matriz B eh reconvertida para a base original
 **/
-void resolveSisLinPermutado(double **A, double *B, int *P, int n)
+void resolveSisLinPermutado(double **A, double *B, double *X, int *P, int n)
 {
     double *Y = (double *)malloc(n * sizeof(double*));
-    double *X = (double *)malloc(n * sizeof(double*));
     double temp;
     int i, j;
 
@@ -14,9 +13,13 @@ void resolveSisLinPermutado(double **A, double *B, int *P, int n)
 
     for (j=0; j<n; j++)
     {
-        temp = B[j];
-        B[j] = B[P[j]];
-        B[P[j]] = temp;
+        if(j != P[j])
+        {
+            temp = B[j];
+            B[j] = B[P[j]];
+            B[P[j]] = temp;
+        }
+
     }
 
      printf("\n\n[PB]: \n");
@@ -49,6 +52,12 @@ void resolveSisLinPermutado(double **A, double *B, int *P, int n)
         for(j=i+1; j<n; j++)
         {
             X[i] = X[i] - A[i][j]*X[j];
+        }
+        //Caso A[i][i] seja 0 o sistema possui infinitas sol
+        if (A[i][i] == 0)
+        {
+            printf("\n\nErro: Sistema Indeterminado\n");
+            return;
         }
         X[i]= X[i]/A[i][i];
     }

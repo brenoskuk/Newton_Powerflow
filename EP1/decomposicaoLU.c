@@ -11,7 +11,7 @@ double modulo(double val) {
   }
 }
 
-void decomposicaoLU(double **A, double *B, int *P, int n)
+void decomposicaoLU(double **A, int *P, int n)
 {
     double temp;
     int i,j,k,l;
@@ -76,13 +76,5 @@ void decomposicaoLU(double **A, double *B, int *P, int n)
         printf("%d ",P[i]);
     }
     printf("\n");
-
-    printf("[B]: \n");
-    for(i=0; i<n; i++)
-    {
-        printf("%lf ",B[i]);
-    }
-    printf("\n");
-
 
 }

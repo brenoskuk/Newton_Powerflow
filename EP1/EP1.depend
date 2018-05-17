@@ -1,11 +1,12 @@
 # depslib dependency file v1.0
-1526521591 source:c:\users\brenobsk\desktop\numericoep1\ep1\main.c
+1526527564 source:c:\users\brenobsk\desktop\numericoep1\ep1\main.c
 	<stdio.h>
 	<stdlib.h>
 	"montaMatrizQuadrada.h"
 	"montaVetor.h"
 	"decomposicaoLU.h"
 	"resolveSisLin.h"
+	"iteracaoNewton.h"
 
 1526517600 c:\users\brenobsk\desktop\numericoep1\ep1\montamatrizquadrada.h
 
@@ -15,10 +16,10 @@
 	<stdbool.h>
 	"montaMatrizQuadrada.h"
 
-1526521561 source:c:\users\brenobsk\desktop\numericoep1\ep1\decomposicaolu.c
+1526526571 source:c:\users\brenobsk\desktop\numericoep1\ep1\decomposicaolu.c
 	<stdio.h>
 
-1526519216 c:\users\brenobsk\desktop\numericoep1\ep1\decomposicaolu.h
+1526526532 c:\users\brenobsk\desktop\numericoep1\ep1\decomposicaolu.h
 
 1526517886 source:c:\users\brenobsk\desktop\numericoep1\ep1\montavetor.c
 	<stdio.h>
@@ -62,8 +63,14 @@
 1526488060 source:c:\users\breno\desktop\numericoep1\ep1\resolvesislin.c
 	<stdio.h>
 
-1526521585 c:\users\brenobsk\desktop\numericoep1\ep1\resolvesislin.h
+1526527544 c:\users\brenobsk\desktop\numericoep1\ep1\resolvesislin.h
 
-1526521578 source:c:\users\brenobsk\desktop\numericoep1\ep1\resolvesislin.c
+1526525350 source:c:\users\brenobsk\desktop\numericoep1\ep1\resolvesislin.c
 	<stdio.h>
+
+1526527517 source:c:\users\brenobsk\desktop\numericoep1\ep1\iteracaonewton.c
+	<stdio.h>
+	"resolveSisLin.h"
+
+1526527354 c:\users\brenobsk\desktop\numericoep1\ep1\iteracaonewton.h
 

@@ -5,6 +5,8 @@
 #include "montaVetor.h"
 #include "decomposicaoLU.h"
 #include "resolveSisLin.h"
+#include "iteracaoNewton.h"
+
 
 int main()
 {
@@ -23,9 +25,9 @@ int main()
     if (ordemA = ordemB)
     {
         //Aloca a memoria para o vetor de pivos
-        decomposicaoLU(A, B, P,ordemA);
+        decomposicaoLU(A, P,ordemA);
         //Note que B esta permutada
-        resolveSisLinPermutado(A, B, P, ordemA);
+        resolveSisLinPermutado(A, B, X, P, ordemA);
     }
     else
     {

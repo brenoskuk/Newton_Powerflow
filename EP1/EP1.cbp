@@ -36,6 +36,10 @@
 			<Option target="Debug" />
 		</Unit>
 		<Unit filename="decomposicaoLU.h" />
+		<Unit filename="iteracaoNewton.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="iteracaoNewton.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
