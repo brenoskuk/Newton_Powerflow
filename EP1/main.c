@@ -7,7 +7,7 @@
 #include "decomposicaoLU.h"
 #include "resolveSisLin.h"
 #include "iteracaoNewton.h"
-
+#include "testes.h"
 
 int main()
 {
@@ -19,7 +19,8 @@ int main()
 
     eps = 0.001;
     maxIteracoes = 30;
-    n = 2;
+    n = 19;
+
     J = (double **)malloc(n * sizeof(double*));
         for(i = 0; i < n; i++)
             J[i] = (double *)malloc(n * sizeof(double));
@@ -28,26 +29,29 @@ int main()
     X =  (double *)calloc(n, sizeof(double));
     C =  (double *)calloc(n, sizeof(double));
     //Define valores iniciais:
+    for (i=0;i<n;i++)
+    {
+        X[i] = 0;
+    }
 
-    X[0] = 0;
-    X[1] = 0;
     parada = 0;
-    k = 1;
+    k = 0;
     while ((parada == 0)&&(k < maxIteracoes))
     {
-
-        Fx[0] = pow(X[0]-2, 2);
-        Fx[1] = pow(X[1]-3, 2);
-        J[0][0] = 2*X[0] - 4;
-        J[0][1] = 0;
-        J[1][0] = 0;
-        J[1][1] = 2*X[1] - 6;
-
-        printf("\nIteracao: %d\n", k);
-        printf("\n[X]: \n");
+        F3(J, Fx, X, n+1);
+        printf("\n[J]: \n");
         for(i=0; i<n; i++)
         {
-            printf("%9.5f ",X[i]);
+            int j;
+            for(j=0; j<n;j++)
+                printf("%9.3f ",J[i][j]);
+            printf("\n");
+        }
+        printf("\n");
+        printf("\n[Fx]: \n");
+        for(i=0; i<n; i++)
+        {
+            printf("%9.3f ",Fx[i]);
         }
         printf("\n");
         //Resolve uma iteracao do metodo de newton
@@ -67,7 +71,19 @@ int main()
         {
             parada = 1;
         }
-        k++;
+        else
+        {
+            k++;
+        }
     }
+    //Imprime os resultados
+    printf("Numero de iteracoes: %d", k);
+    printf("\n[X]: \n");
+    for(i=0; i<n; i++)
+    {
+        printf("%9.5f ",X[i]);
+    }
+    printf("\n");
+
     return 0;
 }
