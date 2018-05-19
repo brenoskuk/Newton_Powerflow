@@ -1,14 +1,16 @@
 #include<stdio.h>
+#include<stdlib.h>
 /**resolve sistema linear dada uma matriz LU e sua
 respectiva matriz B permutada. Ao fim do algoritmo
 a matriz B eh reconvertida para a base original
 **/
 void resolveSisLinPermutado(double **A, double *B, double *X, int *P, int n)
 {
-    double *Y = (double *)malloc(n * sizeof(double*));
+    double *Y;
     double temp;
     int i, j;
 
+    Y = (double *)malloc(n * sizeof(double));
     //Permuta B
 
     for (j=0; j<n; j++)
@@ -22,14 +24,16 @@ void resolveSisLinPermutado(double **A, double *B, double *X, int *P, int n)
 
     }
 
+    /** Print de teste PB
+
      printf("\n\n[PB]: \n");
     for(i=0; i<n; i++)
     {
         printf("%9.3f",B[i]);
     }
+    **/
 
     //Resolve LY=PB
-
     for(i=0; i<n; i++)
     {
         Y[i]=B[i];
@@ -39,11 +43,15 @@ void resolveSisLinPermutado(double **A, double *B, double *X, int *P, int n)
         }
     }
 
+    /** Print de teste Y
+
     printf("\n\n[Y]: \n");
     for(i=0; i<n; i++)
     {
         printf("%9.3f",Y[i]);
     }
+
+    **/
 
     //Resolve o sistema UX = Y
     for(i=n-1; i>=0; i--)
@@ -62,10 +70,13 @@ void resolveSisLinPermutado(double **A, double *B, double *X, int *P, int n)
         X[i]= X[i]/A[i][i];
     }
 
+    /** Print de teste X
     printf("\n\n[X]: \n");
     for(i=0; i<n; i++)
     {
         printf("%9.3f",X[i]);
     }
+    **/
 
+    free(Y);
 }

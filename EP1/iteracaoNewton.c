@@ -1,17 +1,17 @@
 #include<stdio.h>
+#include<stdlib.h>
 #include "resolveSisLin.h"
+#include "decomposicaoLU.h"
 
 /**
 Dado o Jacobiano e os valores da funcao no ponto F(X),
 um ponto inicial X, um erro eps e um numero maximo de imax
 roda uma iteracao do metodo de newton N dimensional
 **/
-void iteracaoNewton (double **J, double *Fx, double *X, double *Xprox, int n)
+void iteracaoNewton (double **J, double *Fx, double *X, double *C, int n)
 {
-    double *C;
     int *P, i;
-    C = (double *)malloc(n * sizeof(double*));
-    P = (int *)malloc(n * sizeof(int*));
+    P = (int *)calloc(n,  sizeof(int));
     //Multiplica cada elemento de Fx por -1
     for(i=0; i<n; i++)
     {
@@ -24,7 +24,7 @@ void iteracaoNewton (double **J, double *Fx, double *X, double *Xprox, int n)
     //Resolve Xprox = X + C
     for(i=0; i<n; i++)
     {
-        Xprox[i] = X[i] + C[i];
+        X[i] = X[i] + C[i];
     }
-
+    free(P);
 }

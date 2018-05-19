@@ -2,6 +2,7 @@
 //Codigo da decomposicao LU com pivotamento como sugerido
 //no enunciado do EP
 
+
 double modulo(double val) {
   if (val < 0) {
     return -val;
@@ -58,10 +59,18 @@ void decomposicaoLU(double **A, int *P, int n)
                 sum = sum + A[k][i]*A[i][j];
             }
             A[k][j] = A[k][j] - sum;
+            //previne valores indefinidos porem nao significa que
+            //a resposta esta correta:
+            if(A[k][k] == 0)
+            {
+                printf("\n Aviso: Provavel sistema indeterminado. Entre com valores iniciais distintos.");
+                A[k][k] = 0.0000000000001;
+            }
             A[j][k] = A[j][k]/A[k][k];
         }
     }
 
+    /** Prints de teste
     printf("[A]: \n");
     for(i=0; i<n; i++)
     {
@@ -76,5 +85,6 @@ void decomposicaoLU(double **A, int *P, int n)
         printf("%d ",P[i]);
     }
     printf("\n");
+    **/
 
 }
