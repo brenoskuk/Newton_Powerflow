@@ -11,79 +11,18 @@
 
 int main()
 {
-    double **J;
-    double *Fx, *X, *C;
-    double eps, maxC;
-    int i,k,n, maxIteracoes, parada;
-
-
-    eps = 0.001;
-    maxIteracoes = 30;
-    n = 19;
-
-    J = (double **)malloc(n * sizeof(double*));
-        for(i = 0; i < n; i++)
-            J[i] = (double *)malloc(n * sizeof(double));
-
-    Fx = (double *)calloc(n,  sizeof(double));
-    X =  (double *)calloc(n, sizeof(double));
-    C =  (double *)calloc(n, sizeof(double));
-    //Define valores iniciais:
-    for (i=0;i<n;i++)
-    {
-        X[i] = 0;
-    }
-
-    parada = 0;
-    k = 0;
-    while ((parada == 0)&&(k < maxIteracoes))
-    {
-        F3(J, Fx, X, n+1);
-        printf("\n[J]: \n");
-        for(i=0; i<n; i++)
-        {
-            int j;
-            for(j=0; j<n;j++)
-                printf("%9.3f ",J[i][j]);
-            printf("\n");
-        }
-        printf("\n");
-        printf("\n[Fx]: \n");
-        for(i=0; i<n; i++)
-        {
-            printf("%9.3f ",Fx[i]);
-        }
-        printf("\n");
-        //Resolve uma iteracao do metodo de newton
-        iteracaoNewton(J, Fx, X, C, n);
-
-        //Captura o maior modulo de residuo
-        maxC = fabs(C[0]);
-        for (i=0; i<n; i++)
-        {
-            if(maxC < fabs(C[i]))
-            {
-                maxC = fabs(C[i]);
-            }
-        }
-        //Verifica se o criterio de parada foi satisfeito
-        if(maxC < eps)
-        {
-            parada = 1;
-        }
-        else
-        {
-            k++;
-        }
-    }
-    //Imprime os resultados
-    printf("Numero de iteracoes: %d", k);
-    printf("\n[X]: \n");
-    for(i=0; i<n; i++)
-    {
-        printf("%9.5f ",X[i]);
-    }
+    /**
+    int teste;
+    printf("**** Testes ****\n");
+    printf ("0)Teste 1 - cond. iniciais = (0,0)\n");
+    printf ("1)Teste 2 - cond. iniciais = (1,1,1,1)\n");
+    printf ("2)Teste 3 - n = 20 - cond. iniciais nulas\n");
+    printf ("3)Teste 3 - n = 40 - cond. iniciais nulas\n");
+    printf ("4)Teste 3 - n = 80 - cond. iniciais nulas\n");
+    printf ("Selecione um teste: ");
+    scanf ("%d", &teste);
     printf("\n");
+    executaTeste(teste);
+    **/
 
-    return 0;
 }

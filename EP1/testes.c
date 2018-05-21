@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 
 
@@ -40,6 +41,7 @@ void F2(double **J, double *Fx, double *X)
 void F3(double **J, double *Fx, double *X, int n)
 {
     int i,j;
+
     //Vetor de F(X)
     //A primeira linha da matriz eh feita manualmente
     Fx[0]= 2*X[0] - X[1] - exp(X[0])/pow(n,2);
@@ -49,7 +51,7 @@ void F3(double **J, double *Fx, double *X, int n)
         Fx[i] = -X[i-1]+2*X[i]-X[i+1] - exp(X[i])/(pow(n,2));
     }
     //A linha n-1 eh feita manualmente
-    Fx[n-2]= -X[n-3] + 2*X[n-2] - 1/(pow(n,2));
+    Fx[n-2]= -X[n-3] + 2*X[n-2] - exp(X[n-2])/(pow(n,2));
 
     //Jacobiano
     //A primeira linha do Jacobiano eh feita manualmente:
@@ -80,3 +82,119 @@ void F3(double **J, double *Fx, double *X, int n)
     J[n-2][n-3] = -1;
     J[n-2][n-2] = 2 - exp(X[n-2])/(pow(n,2));
 }
+
+//Executa os testes com erro igual a 10E-5
+int executaTeste(int teste)
+{
+    double **J;
+    double *Fx, *X, *C;
+    double eps, maxC;
+    int i,k,n, maxIteracoes, parada;
+
+
+    eps = 0.00001;
+    maxIteracoes = 30;
+
+    if(teste == 0)
+    {
+        n = 2;
+    }
+    else if(teste == 1)
+    {
+        n = 4;
+    }
+    else if(teste == 2)
+    {
+        n = 19;
+    }
+    else if(teste == 3)
+    {
+        n = 39;
+    }
+    else if(teste == 4)
+    {
+        n = 79;
+    }
+    else if(teste == 5)
+    {
+        printf("Digite um n");
+    }
+    else
+    {
+        printf("Erro: Teste invalido");
+        return;
+    }
+    J = (double **)malloc(n * sizeof(double*));
+        for(i = 0; i < n; i++)
+            J[i] = (double *)malloc(n * sizeof(double));
+
+    Fx = (double *)calloc(n, sizeof(double));
+    X =  (double *)calloc(n, sizeof(double));
+    C =  (double *)calloc(n, sizeof(double));
+    //Define valores iniciais:
+    for (i=0;i<n;i++)
+    {
+        if(teste == 1)
+        {
+            X[i]=1;
+        }
+        else
+        {
+            X[i] = 0;
+        }
+    }
+
+    parada = 0;
+    k = 0;
+    while ((parada == 0)&&(k < maxIteracoes))
+    {
+        if (teste == 0)
+        {
+            F1(J,Fx,X);
+        }
+        else if (teste == 1)
+        {
+            F2(J,Fx,X);
+        }
+        else
+        {
+            F3(J, Fx, X, n+1);
+        }
+        //Resolve uma iteracao do metodo de newton
+        iteracaoNewton(J, Fx, X, C, n);
+
+        //Captura o maior modulo de residuo
+        maxC = fabs(C[0]);
+        for (i=0; i<n; i++)
+        {
+            if(maxC < fabs(C[i]))
+            {
+                maxC = fabs(C[i]);
+            }
+        }
+        //Verifica se o criterio de parada foi satisfeito
+        if(maxC < eps)
+        {
+            parada = 1;
+        }
+        else{
+            k++;
+        }
+
+    }
+    //Imprime os resultados
+    printf("Numero de iteracoes: %d\n", k);
+    printf("Erro: %3.5lf\n", eps);
+    printf("\n[X]: \n");
+    for(i=0; i<n; i++)
+    {
+        printf("%9.5f ",X[i]);
+    }
+    printf("\n");
+    free(J);
+    free(X);
+    free(Fx);
+    free(C);
+    return 0;
+}
+

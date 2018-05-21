@@ -32,7 +32,7 @@
 1526748378 source:c:\users\breno\desktop\numericoep1\ep1\decomposicaolu.c
 	<stdio.h>
 
-1526770159 source:c:\users\breno\desktop\numericoep1\ep1\main.c
+1526917942 source:c:\users\breno\desktop\numericoep1\ep1\main.c
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -78,7 +78,7 @@
 
 1526527354 c:\users\brenobsk\desktop\numericoep1\ep1\iteracaonewton.h
 
-1526746639 source:c:\users\breno\desktop\numericoep1\ep1\iteracaonewton.c
+1526912462 source:c:\users\breno\desktop\numericoep1\ep1\iteracaonewton.c
 	<stdio.h>
 	<stdlib.h>
 	"resolveSisLin.h"
@@ -86,9 +86,10 @@
 
 1526746675 c:\users\breno\desktop\numericoep1\ep1\iteracaonewton.h
 
-1526770021 c:\users\breno\desktop\numericoep1\ep1\testes.h
+1526915270 c:\users\breno\desktop\numericoep1\ep1\testes.h
 
-1526770236 source:c:\users\breno\desktop\numericoep1\ep1\testes.c
+1526917971 source:c:\users\breno\desktop\numericoep1\ep1\testes.c
 	<stdio.h>
+	<stdlib.h>
 	<math.h>
 

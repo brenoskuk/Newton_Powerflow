@@ -55,6 +55,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="resolveSisLin.h" />
+		<Unit filename="testes.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="testes.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
