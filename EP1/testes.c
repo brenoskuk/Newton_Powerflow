@@ -84,7 +84,7 @@ void F3(double **J, double *Fx, double *X, int n)
 }
 
 //Executa os testes com erro igual a 10E-5
-int executaTeste(int teste)
+int executaTestes(int teste)
 {
     double **J;
     double *Fx, *X, *C;

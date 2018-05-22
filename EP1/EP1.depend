@@ -32,7 +32,7 @@
 1526748378 source:c:\users\breno\desktop\numericoep1\ep1\decomposicaolu.c
 	<stdio.h>
 
-1526917942 source:c:\users\breno\desktop\numericoep1\ep1\main.c
+1527000496 source:c:\users\breno\desktop\numericoep1\ep1\main.c
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -41,6 +41,7 @@
 	"decomposicaoLU.h"
 	"resolveSisLin.h"
 	"iteracaoNewton.h"
+	"redes.h"
 	"testes.h"
 
 1526740314 c:\users\breno\desktop\numericoep1\ep1\montamatrizquadrada.h
@@ -49,7 +50,7 @@
 
 1526740314 c:\users\breno\desktop\numericoep1\ep1\decomposicaolu.h
 
-1526740314 source:c:\users\breno\desktop\numericoep1\ep1\montamatrizquadrada.c
+1526992908 source:c:\users\breno\desktop\numericoep1\ep1\montamatrizquadrada.c
 	<stdio.h>
 	<stdlib.h>
 	<stdbool.h>
@@ -86,10 +87,20 @@
 
 1526746675 c:\users\breno\desktop\numericoep1\ep1\iteracaonewton.h
 
-1526915270 c:\users\breno\desktop\numericoep1\ep1\testes.h
+1526920358 c:\users\breno\desktop\numericoep1\ep1\testes.h
 
-1526917971 source:c:\users\breno\desktop\numericoep1\ep1\testes.c
+1526920357 source:c:\users\breno\desktop\numericoep1\ep1\testes.c
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
+
+1527000903 source:c:\users\breno\desktop\numericoep1\ep1\redes.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	<string.h>
+	<math.h>
+	"redes.h"
+
+1527000101 c:\users\breno\desktop\numericoep1\ep1\redes.h
 

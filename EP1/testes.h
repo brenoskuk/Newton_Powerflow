@@ -8,6 +8,6 @@ void F2(double **J, double *Fx, double *X);
 
 void F3(double **J, double *Fx, double *X, int n);
 
-int executaTeste(int teste);
+int executaTestes(int teste);
 
 #endif // TESTES_H_INCLUDED
