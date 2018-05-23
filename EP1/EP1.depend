@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1527066362 source:c:\users\brenobsk\desktop\numericoep1\ep1\main.c
+1527069056 source:c:\users\brenobsk\desktop\numericoep1\ep1\main.c
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -79,7 +79,7 @@
 	<stdio.h>
 	<stdlib.h>
 
-1527065577 source:c:\users\brenobsk\desktop\numericoep1\ep1\iteracaonewton.c
+1527068524 source:c:\users\brenobsk\desktop\numericoep1\ep1\iteracaonewton.c
 	<stdio.h>
 	<stdlib.h>
 	"resolveSisLin.h"
@@ -119,7 +119,7 @@
 
 1527031302 c:\users\brenobsk\desktop\numericoep1\ep1\testes.h
 
-1527063925 source:c:\users\brenobsk\desktop\numericoep1\ep1\redes.c
+1527069489 source:c:\users\brenobsk\desktop\numericoep1\ep1\redes.c
 	<stdio.h>
 	<stdlib.h>
 	<stdbool.h>
@@ -134,11 +134,11 @@
 	<stdlib.h>
 	<math.h>
 
-1527065611 source:c:\users\brenobsk\desktop\numericoep1\ep1\barras.c
+1527070439 source:c:\users\brenobsk\desktop\numericoep1\ep1\barras.c
 	<stdlib.h>
 	"barras.h"
 
-1527063127 c:\users\brenobsk\desktop\numericoep1\ep1\barras.h
+1527071180 c:\users\brenobsk\desktop\numericoep1\ep1\barras.h
 
 1527044364 source:c:\users\brenobsk\desktop\numericoep1\ep1\derivadasparciais.c
 	<stdio.h>
@@ -151,7 +151,7 @@
 1527038076 c:\users\brenobsk\desktop\numericoep1\ep1\derivadasparciais.h
 	"barras.h"
 
-1527063650 source:c:\users\brenobsk\desktop\numericoep1\ep1\operacoes.c
+1527070914 source:c:\users\brenobsk\desktop\numericoep1\ep1\operacoes.c
 	<string.h>
 	<math.h>
 	"operacoes.h"

@@ -12,13 +12,17 @@ double tensao(barra* b){
 barra* newPQ    (double ativa,   double reativa,  double vNom){
     barra* p = malloc(sizeof(barra));
 
-    p->ativaEsp     = ativa;
-    p->reativaEsp   = reativa;
+    //ativaEsp e reativaEsp sao nulos
+    p->ativaEsp     = 0;
+    p->reativaEsp   = 0;
+
+    p->ativaNom     = ativa;
+    p->reativaNom   = reativa;
 
     p->vnominal     = vNom;
 
-    p->ativaCalc    = 0;
-    p->reativaCalc  = 0;
+    p->ativaCalc    = ativa;
+    p->reativaCalc  = reativa;
 
     //Condicoes iniciais
     p->fase         = 0;
@@ -29,11 +33,11 @@ barra* newPQ    (double ativa,   double reativa,  double vNom){
     return p;
 }
 
-barra* newPV    (double ativa,   double modulo,  double vNom){
+barra* newPV    (double ativa,   double V,  double vNom){
     barra* p = malloc(sizeof(barra));
 
     p->ativaEsp     = ativa;
-    p->V            = vNom;
+    p->V            = V;
     p->vnominal     = vNom;
 
 

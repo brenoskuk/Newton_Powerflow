@@ -13,6 +13,9 @@ struct bar {
     double ativaEsp;     //Valor Especificado da Potência Ativa injetada na barra;
     double ativaCalc;    //Valor Calculado;
 
+    double ativaNom;
+    double reativaNom;
+
     double reativaEsp;   //Valor Especificado da Potência Reativa injetada na barra;
     double reativaCalc;  //Valor Calculado;
 

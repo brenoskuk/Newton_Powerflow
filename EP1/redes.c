@@ -113,11 +113,11 @@ Preenche o vetor F1 dado um estado de barras da rede
 obs:  Assume que a barra 0 eh tipo Swing
 **/
 void termoConhecido(barra **b, int n1,int n2, double *Fx){
-    int i, j, k, nPV;
+    int i, j, k, centro, nPV;
 
-
+    centro = n1 + n2;
     //Captura a posicao da barra PV
-    for(i=0 ; i < n1 + n2; i++)
+    for(i=0 ; i < centro; i++)
     {
         if(b[i]->tipo == 1)
         {
@@ -128,16 +128,16 @@ void termoConhecido(barra **b, int n1,int n2, double *Fx){
     //Calcula a parte de FP de F
     //Note que a barra swing nao contribui com o sistema de equacoes
 
-    for(j=1; j < n1 + n2 +1; j++)
+    for(j=1; j < centro +1; j++)
     {
         Fx[j-1] = fp(j,b);
     }
 
      k=1;
    //Calcula a parte de FQ de F
-    for(j = n1+n2 + 1; j < 2*n1+n2 + 1; j++)
+    for(j = centro + 1; j < 2*centro + 1; j++)
     {
-        Fx[j] = fq(k,b);
+        Fx[j-1] = fq(k,b);
         k++;
     }
 

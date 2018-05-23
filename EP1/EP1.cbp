@@ -31,6 +31,10 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="barras.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="barras.h" />
 		<Unit filename="decomposicaoLU.c">
 			<Option compilerVar="CC" />
 			<Option target="Debug" />
@@ -51,6 +55,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="montaVetor.h" />
+		<Unit filename="operacoes.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="operacoes.h" />
 		<Unit filename="redes.c">
 			<Option compilerVar="CC" />
 		</Unit>

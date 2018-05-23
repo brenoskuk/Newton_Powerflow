@@ -40,7 +40,8 @@ void Pcal(int j, barra **b, int nBarras, double** G, double** B)
     {
         sum = sum + ((tensao(b[k]))*(G[j][k]*cos(b[k]->fase-b[j]->fase) - B[j][k]*sin(b[k]->fase-b[j]->fase)));
     }
-    b[j]->ativaCalc = sum*tensao(b[j]);
+    //Subtrai Pesp que eh zero se PQ
+    b[j]->ativaCalc = sum*tensao(b[j]) - b[j]->ativaEsp;
 }
 
 // Calcula a potencia aparente j como Im{S} usando as tensoes de fases calculadas

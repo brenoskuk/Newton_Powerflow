@@ -25,7 +25,7 @@ int main()
     // ordem en n1 + n2, tam eh 2n1 + n2
     int i, j, k, nPQ, nPV, ordem, tam, maxIteracoes, parada;
 
-    eps = 0.00001;
+    eps = 0.001;
     maxIteracoes = 30;
 
 
@@ -34,6 +34,8 @@ int main()
     char enderecoRede1Y[]="../Redes/1_Stevenson/1_Stevenson_Ynodal.txt";
     char enderecoRede2Barras[]="../Redes/2_Reticulada/2_Reticulada_DadosBarras.txt";
     char enderecoRede2Y[]="../Redes/2_Reticulada/2_Reticulada_Ynodal.txt";
+    char enderecoRede3Barras[]="../Redes/3_Distribuicao_Primaria/3_Distribuicao_Primaria_DadosBarras.txt";
+    char enderecoRede3Y[]="../Redes/3_Distribuicao_Primaria/3_Distribuicao_Primaria_Ynodal.txt";
     char enderecoRede4Y[]="../Redes/4_Distribuicao_Pri_Sec/4_Distribuicao_Primaria_Secundaria_Ynodal.txt";
     char enderecoRede4Barras[]="../Redes/4_Distribuicao_Pri_Sec/4_Distribuicao_Primaria_Secundaria_DadosBarras.txt";
 
@@ -119,10 +121,10 @@ int main()
     //Imprime os resultados
     printf("Numero de iteracoes: %d\n", k);
     printf("Erro: %3.5lf\n", eps);
-    printf("\n[X]: \n");
+    printf("\n[tensoes]: \n");
     for(i=0; i<ordem; i++)
     {
-        printf("%9.5f ",b[i]->V);
+        printf("%d : %9.5lf /_ %9.5lf \n",i ,b[i]->V, b[i]->fase);
     }
     printf("\n");
 

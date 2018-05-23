@@ -20,7 +20,7 @@ void iteracaoNewton (double **J, double *Fx, double *X, double *C, int n)
     }
     //Realiza a decomposicao LU sobre JC
     decomposicaoLU(J, P, n);
-    //Resolve O SL JC = P-Fx
+    //Resolve O s.l. JC = P(-Fx)
     resolveSisLinPermutado(J, Fx, C, P, n);
     //Resolve Xprox = X + C
     for(i=0; i<n; i++)
@@ -48,7 +48,7 @@ void iteracaoNewtonBarra (double **J, double *Fx, barra **b, double *C, int n1, 
     }
     //Realiza a decomposicao LU sobre JC
     decomposicaoLU(J, P, 2*n1 + n2);
-    //Resolve O SL JC = P-Fx
+    //Resolve O s.l. JC = P(-Fx)
     resolveSisLinPermutado(J, Fx, C, P, 2*n1 + n2);
     //Resolve Xprox = X + C para i = 0 ate n1 + n2 (Theta1)
     //Lembrar que a barra de swing ocupa b[0]!!!
