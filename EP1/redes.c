@@ -11,10 +11,10 @@
 /**
 A partir do struct barra le os dados e cria um vetor de barras
 **/
-barra** lerDadosBarras(char endereco[100], int* nBarras, int* nPQ, int* nPV){
+barra** lerDadosBarras(char endereco[100], int* nBarras, int* nPQ, int* nPV, int *posPV, int *posSW){
     barra **b;
     double Vnom, leitura1, leitura2;
-    int i, tipo, contQ, contV;
+    int i, tipo, contQ, contV, linPv, linSW;
     FILE* dadosBarras;
     dadosBarras = fopen(endereco, "r");
     fscanf(dadosBarras, "%d", nBarras);
@@ -37,17 +37,19 @@ barra** lerDadosBarras(char endereco[100], int* nBarras, int* nPQ, int* nPV){
         fscanf(dadosBarras, "%lf", &leitura2);
         if (tipo == 0)
         {
-            b[c] = newPQ((double)leitura1, (double)leitura2, Vnom);
+            b[c] = newPQ(i,leitura1, leitura2, Vnom);
             contQ++;
         }
         else if (tipo == 1)
         {
-            b[c] = newPV((double)leitura1, (double)leitura2, Vnom);
+            linPv = c;
+            b[c] = newPV(i,leitura1, Vnom);
             contV++;
         }
         else if (tipo == 2)
         {
-            b[c] = newSwing((double)leitura1, (double)leitura2, Vnom);
+            linSW = c;
+            b[c] = newSwing(i,leitura1, leitura2, Vnom);
         }
         else
         {
@@ -57,13 +59,45 @@ barra** lerDadosBarras(char endereco[100], int* nBarras, int* nPQ, int* nPV){
     }
 
     fclose(dadosBarras);
+
     *nPQ = contQ;
     *nPV = contV;
-
+    *posPV = linPv;
+    *posSW = linSW;
     return b;
 }
 
+/**
+Cria nova barra sem SW e com PV na posicao 0
+**/
+barra** reorganizaBarras(barra **b, int nBarras)
+{
+    int i, k, temp;
+    barra **br;
 
+
+    //br tem o tamanho de nBarras - 1 pois exclui Swing
+    br = malloc((nBarras-1) * sizeof(barra*));
+    k=0;
+    for(i=0; i<nBarras; i++)
+    {
+        //barra do tipo PQ vai para a posicao k de br
+        if (b[i]->tipo == 0)
+        {
+            br[k] = newPQ(b[i]->indice, b[i]->ativaNom, b[i]->reativaNom, b[i]->vnominal);
+            k++;
+        }
+        //guarda a posicao
+        if (b[i]->tipo == 1)
+        {
+            temp = b[i]->indice;
+        }
+        //ignora barra SWING
+    }
+    //guarda PV
+    br[k]=newPV(b[temp]->indice, b[temp]->ativaNom, b[temp]->vnominal);
+    return br;
+}
 /**
 Monta as matrizes de condutancias e suseptancias
  OBS: TOMA COMO PARAMETRO O TAMANHO OBTIDO POR getMatrizBarras
@@ -116,28 +150,19 @@ void termoConhecido(barra **b, int n1,int n2, double *Fx){
     int i, j, k, centro, nPV;
 
     centro = n1 + n2;
-    //Captura a posicao da barra PV
-    for(i=0 ; i < centro; i++)
-    {
-        if(b[i]->tipo == 1)
-        {
-            nPV=i;
-        }
-    }
-
     //Calcula a parte de FP de F
     //Note que a barra swing nao contribui com o sistema de equacoes
 
-    for(j=1; j < centro +1; j++)
+    for(j=0; j <= centro; j++)
     {
-        Fx[j-1] = fp(j,b);
+        Fx[j] = fp(j,b);
     }
 
      k=1;
    //Calcula a parte de FQ de F
-    for(j = centro + 1; j < 2*centro + 1; j++)
+    for(j = centro; j <= centro + n1 ; j++)
     {
-        Fx[j-1] = fq(k,b);
+        Fx[j] = fq(k,b);
         k++;
     }
 
@@ -156,11 +181,11 @@ void Jacobiana(double **J, int n1, int n2, barra **b, double **G, double **B) {
 
 
     //Sao as derivadas parciais fpj com relacao a thetak
-    for ( j = 1; j <= centro; j++)
+    for ( j = 0; j <= centro; j++)
     {
         for (int k = 1; k <= centro; k++)
         {
-            J[j-1][k-1] = Dfpj_Dtetak(j, k, b, G, B);
+            J[j][k] = Dfpj_Dtetak(j, k, b, G, B);
         }
     }
     //Calcula o segundo "quadrante" do Jacobiano

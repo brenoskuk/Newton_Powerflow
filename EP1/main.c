@@ -15,19 +15,18 @@
 
 int main()
 {
-    barra **b;
+    barra **b, **br;
     double **B, **G, **J, **BARRA;
 
     double *Fx, *C, *X;
 
     double eps, maxC;
 
-    // ordem en n1 + n2, tam eh 2n1 + n2
-    int i, j, k, nPQ, nPV, ordem, tam, maxIteracoes, parada;
+    // btamanho en n1 + n2, tam eh 2n1 + n2
+    int i, j, k, nPQ, nPV, btamanho, tam, maxIteracoes, parada, posPV, posSW;
 
     eps = 0.001;
     maxIteracoes = 30;
-
 
     //enderecos das redes
     char enderecoRede1Barras[]="../Redes/1_Stevenson/1_Stevenson_DadosBarras.txt";
@@ -40,9 +39,10 @@ int main()
     char enderecoRede4Barras[]="../Redes/4_Distribuicao_Pri_Sec/4_Distribuicao_Primaria_Secundaria_DadosBarras.txt";
 
 
-
+    // ordem en n1 + n2
     //montaMatrizQuadrada(enderecoRede, &ordem);
-    b = lerDadosBarras( enderecoRede1Barras, &ordem, &nPQ, &nPV );
+    b = lerDadosBarras( enderecoRede1Barras, &btamanho, &nPQ, &nPV ,&posPV, &posSW);
+    br = reorganizaBarras(b, btamanho);
 
     tam = 2*nPQ + nPV;
 
@@ -60,20 +60,20 @@ int main()
         }
 
 
-    G = (double **)calloc(ordem , sizeof(double*));
-        for(i = 0; i < ordem; i++)
+    G = (double **)calloc(btamanho , sizeof(double*));
+        for(i = 0; i < btamanho; i++)
         {
-             G[i] = (double *)calloc(ordem , sizeof(double));
+             G[i] = (double *)calloc(btamanho , sizeof(double));
         }
 
 
-    B = (double **)calloc(ordem , sizeof(double*));
-        for(i = 0; i < ordem; i++)
+    B = (double **)calloc(btamanho , sizeof(double*));
+        for(i = 0; i < btamanho; i++)
         {
-            B[i] = (double *)calloc(ordem , sizeof(double));
+            B[i] = (double *)calloc(btamanho , sizeof(double));
         }
 
-    getMatrizAdmitancia(G, B, ordem, enderecoRede1Y);
+    getMatrizAdmitancia(G, B, btamanho, enderecoRede1Y);
 
     //O struct barra inicializa as barras nas condicoes inciais
 
@@ -83,21 +83,22 @@ int main()
     while ((parada == 0)&&(k < maxIteracoes))
     {
         //Calcula Pesp e Qesp com base nos valores atuais
-        for(j=0; j<ordem; j++)
+        for(j=0; j< btamanho; j++)
         {
-            Pcal(j, b, ordem, G, B);
-            Qcal(j, b, ordem, G, B);
+            Pcal(j, b, btamanho, G, B);
+            Qcal(j, b, btamanho, G, B);
         }
 
+        printf("oi");
         //Calcula o termo conhecido:
-        termoConhecido(b, nPQ, nPV, Fx);
-
+        termoConhecido(br, nPQ, nPV, Fx);
+        printf("oi");
         //Calcula o Jacobiano
-        Jacobiana(J, nPQ, nPV, b , G, B);
+        Jacobiana(J, nPQ, nPV, br , G, B);
 
-
+        printf("oi");
         //Resolve uma iteracao do metodo de newton
-        iteracaoNewtonBarra(J, Fx, b, C, nPQ, nPV);
+        iteracaoNewtonBarra(J, Fx, br, C, nPQ, nPV);
 
         //Captura o maior modulo de residuo
         maxC = fabs(C[0]);
@@ -122,7 +123,7 @@ int main()
     printf("Numero de iteracoes: %d\n", k);
     printf("Erro: %3.5lf\n", eps);
     printf("\n[tensoes]: \n");
-    for(i=0; i<ordem; i++)
+    for(i=0; i<btamanho; i++)
     {
         printf("%d : %9.5lf /_ %9.5lf \n",i ,b[i]->V, b[i]->fase);
     }

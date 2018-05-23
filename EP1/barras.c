@@ -9,7 +9,7 @@ double tensao(barra* b){
     return b->V;
 }
 
-barra* newPQ    (double ativa,   double reativa,  double vNom){
+barra* newPQ    (int indice, double ativa,   double reativa,  double vNom){
     barra* p = malloc(sizeof(barra));
 
     //ativaEsp e reativaEsp sao nulos
@@ -33,11 +33,11 @@ barra* newPQ    (double ativa,   double reativa,  double vNom){
     return p;
 }
 
-barra* newPV    (double ativa,   double V,  double vNom){
+barra* newPV    (int indice, double ativa, double vNom){
     barra* p = malloc(sizeof(barra));
 
     p->ativaEsp     = ativa;
-    p->V            = V;
+    p->V            = vNom;
     p->vnominal     = vNom;
 
 
@@ -50,10 +50,10 @@ barra* newPV    (double ativa,   double V,  double vNom){
     return p;
 }
 
-barra* newSwing (double modulo,  double fase  ,  double vNom){
+barra* newSwing (int indice, double V,  double fase  ,  double vNom){
     barra* p = malloc(sizeof(barra));
 
-    p->V        = modulo;
+    p->V        = V;
     p->fase     = fase;
     p->vnominal = vNom;
 

@@ -37,7 +37,7 @@
 1526748378 source:c:\users\breno\desktop\numericoep1\ep1\decomposicaolu.c
 	<stdio.h>
 
-1527000496 source:c:\users\breno\desktop\numericoep1\ep1\main.c
+1527095778 source:c:\users\breno\desktop\numericoep1\ep1\main.c
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -48,6 +48,8 @@
 	"iteracaoNewton.h"
 	"redes.h"
 	"testes.h"
+	"barras.h"
+	"operacoes.h"
 
 1526740314 c:\users\breno\desktop\numericoep1\ep1\montamatrizquadrada.h
 
@@ -89,13 +91,15 @@
 1527065610 c:\users\brenobsk\desktop\numericoep1\ep1\iteracaonewton.h
 	"barras.h"
 
-1526912462 source:c:\users\breno\desktop\numericoep1\ep1\iteracaonewton.c
+1527086454 source:c:\users\breno\desktop\numericoep1\ep1\iteracaonewton.c
 	<stdio.h>
 	<stdlib.h>
 	"resolveSisLin.h"
 	"decomposicaoLU.h"
+	"barras.h"
 
-1526746675 c:\users\breno\desktop\numericoep1\ep1\iteracaonewton.h
+1527083108 c:\users\breno\desktop\numericoep1\ep1\iteracaonewton.h
+	"barras.h"
 
 1526920358 c:\users\breno\desktop\numericoep1\ep1\testes.h
 
@@ -104,15 +108,18 @@
 	<stdlib.h>
 	<math.h>
 
-1527000903 source:c:\users\breno\desktop\numericoep1\ep1\redes.c
+1527097863 source:c:\users\breno\desktop\numericoep1\ep1\redes.c
 	<stdio.h>
 	<stdlib.h>
 	<stdbool.h>
 	<string.h>
 	<math.h>
+	"operacoes.h"
+	"barras.h"
 	"redes.h"
 
-1527000101 c:\users\breno\desktop\numericoep1\ep1\redes.h
+1527095059 c:\users\breno\desktop\numericoep1\ep1\redes.h
+	"barras.h"
 
 1527056789 c:\users\brenobsk\desktop\numericoep1\ep1\redes.h
 	"barras.h"
@@ -158,5 +165,20 @@
 	"barras.h"
 
 1527065884 c:\users\brenobsk\desktop\numericoep1\ep1\operacoes.h
+	"barras.h"
+
+1527094448 source:c:\users\breno\desktop\numericoep1\ep1\barras.c
+	<stdlib.h>
+	"barras.h"
+
+1527094364 c:\users\breno\desktop\numericoep1\ep1\barras.h
+
+1527097413 source:c:\users\breno\desktop\numericoep1\ep1\operacoes.c
+	<string.h>
+	<math.h>
+	"operacoes.h"
+	"barras.h"
+
+1527083109 c:\users\breno\desktop\numericoep1\ep1\operacoes.h
 	"barras.h"
 

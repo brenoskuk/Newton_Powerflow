@@ -4,7 +4,9 @@
 #include "barras.h"
 
 
-barra** lerDadosBarras(char endereco[100], int* nBarras, int* nPQ, int* nPV);
+barra** lerDadosBarras(char endereco[100], int* nBarras, int* nPQ, int* nPV, int *posPV, int *posSW);
+
+barra** reorganizaBarras(barra **b, int nBarras);
 
 void getMatrizAdmitancia(double **G, double **B, int tam, char fileName[100]);
 

@@ -21,6 +21,7 @@ struct bar {
 
     double vnominal;
     int tipo;
+    int indice;
 
     double Fp;
 
@@ -30,12 +31,12 @@ struct bar {
 };
 typedef struct bar barra;
 
-barra* newPQ    (double ativa,   double reativa,  double vNom); //representa uma carga, impedância constante, injeção externa de potência = 0;
-barra* newPV    (double ativa,   double V,   double vNom); //representa um gerador;
-barra* newSwing (double V,  double fase  ,   double vNom);
+barra* newPQ    (int indice, double ativa,   double reativa,  double vNom); //representa uma carga, impedância constante, injeção externa de potência = 0;
+barra* newPV    (int indice, double ativa,   double vNom); //representa um gerador;
+barra* newSwing (int indice, double V,  double fase  ,   double vNom);
 
 
 double tensao(barra* b);
-#endif
 
+#endif
 #endif // BARRAS_H_INCLUDED
