@@ -4,12 +4,12 @@
 #include "barras.h"
 
 
-barra** lerDadosBarras(char fileName[100], int* nBarras, int* nPQ, int* nPV);
+barra** lerDadosBarras(char endereco[100], int* nBarras, int* nPQ, int* nPV);
 
-void getMatrizAdmitancia(double **condutancias, double **susceptancias, int tam, char fileName[100]);
+void getMatrizAdmitancia(double **G, double **B, int tam, char fileName[100]);
 
 void Jacobiana(double **J, int n1, int n2, barra* *b, double** condutancias, double** susceptancias);
 
-void stevenson(barra**b, int n1, int n2, double *Fx);
+void termoConhecido(barra **b, int n1,int n2, double *Fx);
 
 #endif // REDES_H_INCLUDED

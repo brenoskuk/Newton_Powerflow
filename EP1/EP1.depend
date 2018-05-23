@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1527053596 source:c:\users\brenobsk\desktop\numericoep1\ep1\main.c
+1527062875 source:c:\users\brenobsk\desktop\numericoep1\ep1\main.c
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -111,12 +111,12 @@
 
 1527000101 c:\users\breno\desktop\numericoep1\ep1\redes.h
 
-1527048453 c:\users\brenobsk\desktop\numericoep1\ep1\redes.h
+1527056789 c:\users\brenobsk\desktop\numericoep1\ep1\redes.h
 	"barras.h"
 
 1527031302 c:\users\brenobsk\desktop\numericoep1\ep1\testes.h
 
-1527054605 source:c:\users\brenobsk\desktop\numericoep1\ep1\redes.c
+1527061297 source:c:\users\brenobsk\desktop\numericoep1\ep1\redes.c
 	<stdio.h>
 	<stdlib.h>
 	<stdbool.h>
@@ -131,11 +131,11 @@
 	<stdlib.h>
 	<math.h>
 
-1527038828 source:c:\users\brenobsk\desktop\numericoep1\ep1\barras.c
+1527063187 source:c:\users\brenobsk\desktop\numericoep1\ep1\barras.c
 	<stdlib.h>
 	"barras.h"
 
-1527037301 c:\users\brenobsk\desktop\numericoep1\ep1\barras.h
+1527063127 c:\users\brenobsk\desktop\numericoep1\ep1\barras.h
 
 1527044364 source:c:\users\brenobsk\desktop\numericoep1\ep1\derivadasparciais.c
 	<stdio.h>
@@ -148,12 +148,12 @@
 1527038076 c:\users\brenobsk\desktop\numericoep1\ep1\derivadasparciais.h
 	"barras.h"
 
-1527053678 source:c:\users\brenobsk\desktop\numericoep1\ep1\operacoes.c
+1527063255 source:c:\users\brenobsk\desktop\numericoep1\ep1\operacoes.c
 	<string.h>
 	<math.h>
 	"operacoes.h"
 	"barras.h"
 
-1527054354 c:\users\brenobsk\desktop\numericoep1\ep1\operacoes.h
+1527059636 c:\users\brenobsk\desktop\numericoep1\ep1\operacoes.h
 	"barras.h"
 

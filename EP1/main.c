@@ -19,7 +19,8 @@ int main()
 
     double *Fx, *X;
 
-    int i, j, nPQ, nPV, ordem;
+    // ordem en n1 + n2, tam eh 2n1 + n2
+    int i, j, nPQ, nPV, ordem, tam;
 
 
 
@@ -33,21 +34,48 @@ int main()
 
 
     //montaMatrizQuadrada(enderecoRede, &ordem);
-    b = lerDadosBarras(enderecoRede1Barras, &ordem, &nPQ, &nPV );
+    b = lerDadosBarras( enderecoRede1Barras, &ordem, &nPQ, &nPV );
 
-    //aloca a matriz F
-    Fx = (double *)calloc(2*nPQ + nPV, sizeof(double));
+    tam = 2*nPQ + nPV;
 
-    J = (double **)calloc(2*nPQ + nPV, sizeof(double*));
+
+    //aloca as matrizes e vetores que serao utilizados
+    Fx = (double *)calloc(tam, sizeof(double));
+
+    J = (double **)calloc(tam, sizeof(double*));
         for(i = 0; i < 2*nPQ + nPV; i++)
-            J[i] = (double *)calloc(2*nPQ + nPV, sizeof(double));
+        {
+            J[i] = (double *)calloc(tam, sizeof(double));
+        }
 
-    getMatrizAdmitancia(B, G, ordem, enderecoRede1Y);
 
-    //stevenson(b, nPQ, nPV, Fx);
+    G = (double **)calloc(ordem , sizeof(double*));
+        for(i = 0; i < ordem; i++)
+        {
+             G[i] = (double *)calloc(ordem , sizeof(double));
+        }
 
-    //Jacobiana(J, nPQ, nPV,B , B, G);
 
+    B = (double **)calloc(ordem , sizeof(double*));
+        for(i = 0; i < ordem; i++)
+        {
+            B[i] = (double *)calloc(ordem , sizeof(double));
+        }
+
+    getMatrizAdmitancia(G, B, ordem, enderecoRede1Y);
+
+    //Prepara condicoes iniciais
+    for(i=0; i<ordem; i++)
+    {
+        b[i]->fase=0;
+        b[i]->V=b[i]->vnominal;
+    }
+    //Atualiza os termos calculados:
+
+    termoConhecido(b, nPQ, nPV, Fx);
+
+
+    Jacobiana(J, nPQ, nPV, b , G, B);
 
 
     /**

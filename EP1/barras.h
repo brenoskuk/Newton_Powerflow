@@ -1,13 +1,13 @@
 #ifndef BARRAS_H_INCLUDED
 #define BARRAS_H_INCLUDED
 
-#ifndef BARRA_H
-#define BARRA_H
+#ifndef BARRAS_H
+#define BARRAS_H
 
 
-struct mfar {
+struct bar {
 
-    double modulo;   //Módulo da Tensão na Barra;
+    double V;        //Módulo da Tensão na Barra;
     double fase;     //Fase da Tensão na Barra;
 
     double ativaEsp;     //Valor Especificado da Potência Ativa injetada na barra;
@@ -19,22 +19,20 @@ struct mfar {
     double vnominal;
     int tipo;
 
-    double tensaoPU;
-
     double Fp;
 
 
 
 
 };
-typedef struct mfar barra;
+typedef struct bar barra;
 
 barra* newPQ    (double ativa,   double reativa,  double vNom); //representa uma carga, impedância constante, injeção externa de potência = 0;
-barra* newPV    (double ativa,   double modulo,   double vNom); //representa um gerador;
-barra* newSwing (double modulo,  double fase  ,   double vNom);
+barra* newPV    (double ativa,   double V,   double vNom); //representa um gerador;
+barra* newSwing (double V,  double fase  ,   double vNom);
 
-double modulo(barra* b);
 
+double tensao(barra* b);
 #endif
 
 #endif // BARRAS_H_INCLUDED
