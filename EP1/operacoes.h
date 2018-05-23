@@ -8,7 +8,7 @@ double fq(int j, barra**b);
 
 double fp(int j, barra**b);
 
-void Pcal(int j, barra* *b, int nBarras, double** G, double** B);
+void Pcal(int j, barra **b, int nBarras, double** G, double** B);
 
 void Qcal(int j, barra* *b, int nBarras, double** G, double** B);
 

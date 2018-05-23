@@ -10,6 +10,7 @@
 #include "redes.h"
 #include "testes.h"
 #include "barras.h"
+#include "operacoes.h"
 
 
 int main()
@@ -17,13 +18,18 @@ int main()
     barra **b;
     double **B, **G, **J, **BARRA;
 
-    double *Fx, *X;
+    double *Fx, *C, *X;
+
+    double eps, maxC;
 
     // ordem en n1 + n2, tam eh 2n1 + n2
-    int i, j, nPQ, nPV, ordem, tam;
+    int i, j, k, nPQ, nPV, ordem, tam, maxIteracoes, parada;
+
+    eps = 0.00001;
+    maxIteracoes = 30;
 
 
-
+    //enderecos das redes
     char enderecoRede1Barras[]="../Redes/1_Stevenson/1_Stevenson_DadosBarras.txt";
     char enderecoRede1Y[]="../Redes/1_Stevenson/1_Stevenson_Ynodal.txt";
     char enderecoRede2Barras[]="../Redes/2_Reticulada/2_Reticulada_DadosBarras.txt";
@@ -40,7 +46,10 @@ int main()
 
 
     //aloca as matrizes e vetores que serao utilizados
+    //tam eh 2n1 + n2 ... ordem eh n1 + n2
     Fx = (double *)calloc(tam, sizeof(double));
+
+    C = (double *)calloc(tam, sizeof(double));
 
     J = (double **)calloc(tam, sizeof(double*));
         for(i = 0; i < 2*nPQ + nPV; i++)
@@ -64,18 +73,60 @@ int main()
 
     getMatrizAdmitancia(G, B, ordem, enderecoRede1Y);
 
-    //Prepara condicoes iniciais
+    //O struct barra inicializa as barras nas condicoes inciais
+
+
+    parada = 0;
+    k = 0;
+    while ((parada == 0)&&(k < maxIteracoes))
+    {
+        //Calcula Pesp e Qesp com base nos valores atuais
+        for(j=0; j<ordem; j++)
+        {
+            Pcal(j, b, ordem, G, B);
+            Qcal(j, b, ordem, G, B);
+        }
+
+        //Calcula o termo conhecido:
+        termoConhecido(b, nPQ, nPV, Fx);
+
+        //Calcula o Jacobiano
+        Jacobiana(J, nPQ, nPV, b , G, B);
+
+
+        //Resolve uma iteracao do metodo de newton
+        iteracaoNewtonBarra(J, Fx, b, C, nPQ, nPV);
+
+        //Captura o maior modulo de residuo
+        maxC = fabs(C[0]);
+        for (i=0; i<tam; i++)
+        {
+            if(maxC < fabs(C[i]))
+            {
+                maxC = fabs(C[i]);
+            }
+        }
+        //Verifica se o criterio de parada foi satisfeito
+        if(maxC < eps)
+        {
+            parada = 1;
+        }
+        else{
+            k++;
+        }
+
+    }
+    //Imprime os resultados
+    printf("Numero de iteracoes: %d\n", k);
+    printf("Erro: %3.5lf\n", eps);
+    printf("\n[X]: \n");
     for(i=0; i<ordem; i++)
     {
-        b[i]->fase=0;
-        b[i]->V=b[i]->vnominal;
+        printf("%9.5f ",b[i]->V);
     }
-    //Atualiza os termos calculados:
+    printf("\n");
 
-    termoConhecido(b, nPQ, nPV, Fx);
-
-
-    Jacobiana(J, nPQ, nPV, b , G, B);
+    return 0;
 
 
     /**

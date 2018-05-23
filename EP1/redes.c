@@ -163,15 +163,14 @@ void Jacobiana(double **J, int n1, int n2, barra **b, double **G, double **B) {
             J[j-1][k-1] = Dfpj_Dtetak(j, k, b, G, B);
         }
     }
-
     //Calcula o segundo "quadrante" do Jacobiano
 
     //Sao as derivadas parciais fpj com relacao a Vk
     for (int j = centro; j <= centro + n1; j++)
     {
-        for (int k = 1; k < centro; k++)
+        for (int k = 1; k <= centro; k++)
         {
-            J[j-1][k-1] = Dfpj_DVk(j, k, b, G, B);
+            J[j-1][k-1] = Dfpj_DVk(j-centro, k, b, G, B);
         }
     }
 
@@ -182,7 +181,7 @@ void Jacobiana(double **J, int n1, int n2, barra **b, double **G, double **B) {
     {
         for (int k = centro; k <= centro + n1; k++)
         {
-            J[j-1][k-1] = Dfqj_Dthetak(j, k, b, G, B);
+            J[j-1][k-1] = Dfqj_Dthetak(j, k - centro, b, G, B);
         }
     }
 
@@ -193,7 +192,7 @@ void Jacobiana(double **J, int n1, int n2, barra **b, double **G, double **B) {
     {
         for (int k = centro; k <= centro + n1; k++)
         {
-            J[j-1][k-1] = Dfqj_DVk(j, k, b, G, B);
+            J[j-1][k-1] = Dfqj_DVk(j-centro, k-centro, b, G, B);
         }
     }
 
