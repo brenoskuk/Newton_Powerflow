@@ -1,12 +1,16 @@
 # depslib dependency file v1.0
-1526527564 source:c:\users\brenobsk\desktop\numericoep1\ep1\main.c
+1527041679 source:c:\users\brenobsk\desktop\numericoep1\ep1\main.c
 	<stdio.h>
 	<stdlib.h>
+	<math.h>
 	"montaMatrizQuadrada.h"
 	"montaVetor.h"
 	"decomposicaoLU.h"
 	"resolveSisLin.h"
 	"iteracaoNewton.h"
+	"redes.h"
+	"testes.h"
+	"barras.h"
 
 1526517600 c:\users\brenobsk\desktop\numericoep1\ep1\montamatrizquadrada.h
 
@@ -16,7 +20,7 @@
 	<stdbool.h>
 	"montaMatrizQuadrada.h"
 
-1526526571 source:c:\users\brenobsk\desktop\numericoep1\ep1\decomposicaolu.c
+1527031301 source:c:\users\brenobsk\desktop\numericoep1\ep1\decomposicaolu.c
 	<stdio.h>
 
 1526526532 c:\users\brenobsk\desktop\numericoep1\ep1\decomposicaolu.h
@@ -70,14 +74,17 @@
 
 1526527544 c:\users\brenobsk\desktop\numericoep1\ep1\resolvesislin.h
 
-1526525350 source:c:\users\brenobsk\desktop\numericoep1\ep1\resolvesislin.c
+1527031302 source:c:\users\brenobsk\desktop\numericoep1\ep1\resolvesislin.c
 	<stdio.h>
+	<stdlib.h>
 
-1526527517 source:c:\users\brenobsk\desktop\numericoep1\ep1\iteracaonewton.c
+1527031302 source:c:\users\brenobsk\desktop\numericoep1\ep1\iteracaonewton.c
 	<stdio.h>
+	<stdlib.h>
 	"resolveSisLin.h"
+	"decomposicaoLU.h"
 
-1526527354 c:\users\brenobsk\desktop\numericoep1\ep1\iteracaonewton.h
+1527031302 c:\users\brenobsk\desktop\numericoep1\ep1\iteracaonewton.h
 
 1526912462 source:c:\users\breno\desktop\numericoep1\ep1\iteracaonewton.c
 	<stdio.h>
@@ -103,4 +110,41 @@
 	"redes.h"
 
 1527000101 c:\users\breno\desktop\numericoep1\ep1\redes.h
+
+1527041531 c:\users\brenobsk\desktop\numericoep1\ep1\redes.h
+	"barras.h"
+
+1527031302 c:\users\brenobsk\desktop\numericoep1\ep1\testes.h
+
+1527039554 source:c:\users\brenobsk\desktop\numericoep1\ep1\redes.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	<string.h>
+	<math.h>
+	"derivadasParciais.h"
+	"barras.h"
+	"redes.h"
+
+1527031302 source:c:\users\brenobsk\desktop\numericoep1\ep1\testes.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+
+1527038828 source:c:\users\brenobsk\desktop\numericoep1\ep1\barras.c
+	<stdlib.h>
+	"barras.h"
+
+1527037301 c:\users\brenobsk\desktop\numericoep1\ep1\barras.h
+
+1527038186 source:c:\users\brenobsk\desktop\numericoep1\ep1\derivadasparciais.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	<string.h>
+	<math.h>
+	"barras.h"
+
+1527038076 c:\users\brenobsk\desktop\numericoep1\ep1\derivadasparciais.h
+	"barras.h"
 

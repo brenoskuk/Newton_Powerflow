@@ -9,24 +9,34 @@
 #include "iteracaoNewton.h"
 #include "redes.h"
 #include "testes.h"
+#include "barras.h"
+
 
 int main()
 {
-
+    barra **b;
     double **B, **G, **BARRA;
 
-    int i, j, ordem;
+    double *F, *X;
+
+    int i, j, nPQ, nPV, ordem;
+
+
 
     char enderecoRede1Barras[]="../Redes/1_Stevenson/1_Stevenson_DadosBarras.txt";
     char enderecoRede1Y[]="../Redes/1_Stevenson/1_Stevenson_Ynodal.txt";
-    char enderecoRede4[]="../Redes/4_Distribuicao_Pri_Sec/4_Distribuicao_Primaria_Secundaria_Ynodal.txt";
+    char enderecoRede2Barras[]="../Redes/2_Reticulada/2_Reticulada_DadosBarras.txt";
+    char enderecoRede2Y[]="../Redes/2_Reticulada/2_Reticulada_Ynodal.txt";
+    char enderecoRede4Y[]="../Redes/4_Distribuicao_Pri_Sec/4_Distribuicao_Primaria_Secundaria_Ynodal.txt";
+    char enderecoRede4Barras[]="../Redes/4_Distribuicao_Pri_Sec/4_Distribuicao_Primaria_Secundaria_DadosBarras.txt";
+
 
     //montaMatrizQuadrada(enderecoRede, &ordem);
-    getMatrizBarras(BARRA, &ordem, enderecoRede1Barras);
+    b = lerDadosBarras(enderecoRede1Barras, &ordem, &nPQ, &nPV );
+
     getMatrizAdmitancia(B, G, ordem, enderecoRede1Y);
 
-
-
+    montaF(b, nPQ, nPV, ordem, F);
 
 
 
