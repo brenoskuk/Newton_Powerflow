@@ -15,9 +15,9 @@
 int main()
 {
     barra **b;
-    double **B, **G, **BARRA;
+    double **B, **G, **J, **BARRA;
 
-    double *F, *X;
+    double *Fx, *X;
 
     int i, j, nPQ, nPV, ordem;
 
@@ -31,13 +31,22 @@ int main()
     char enderecoRede4Barras[]="../Redes/4_Distribuicao_Pri_Sec/4_Distribuicao_Primaria_Secundaria_DadosBarras.txt";
 
 
+
     //montaMatrizQuadrada(enderecoRede, &ordem);
     b = lerDadosBarras(enderecoRede1Barras, &ordem, &nPQ, &nPV );
 
+    //aloca a matriz F
+    Fx = (double *)calloc(2*nPQ + nPV, sizeof(double));
+
+    J = (double **)calloc(2*nPQ + nPV, sizeof(double*));
+        for(i = 0; i < 2*nPQ + nPV; i++)
+            J[i] = (double *)calloc(2*nPQ + nPV, sizeof(double));
+
     getMatrizAdmitancia(B, G, ordem, enderecoRede1Y);
 
-    montaF(b, nPQ, nPV, ordem, F);
+    //stevenson(b, nPQ, nPV, Fx);
 
+    //Jacobiana(J, nPQ, nPV,B , B, G);
 
 
 

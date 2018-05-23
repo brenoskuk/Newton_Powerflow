@@ -4,22 +4,25 @@
 #include <string.h>
 #include <math.h>
 
-#include "derivadasParciais.h"
+#include "operacoes.h"
 #include "barras.h"
 #include "redes.h"
 
-
+/**
+A partir do struct barra le os dados e cria um vetor de barras
+**/
 barra** lerDadosBarras(char endereco[100], int* nBarras, int* nPQ, int* nPV){
-    int q = 0; //nPQ
-    int v = 0; //nPV
+    double Vnom, leitura1, leitura2;
+    int i, tipo, contQ, contV;
     FILE* dadosBarras;
     dadosBarras = fopen(endereco, "r");
     fscanf(dadosBarras, "%d", nBarras);
 
+    //atencao: o malloc recebe o tamanho do struct
     barra **b = malloc(*nBarras * sizeof(barra*));
 
-    int i, tipo;
-    double vNominal, leitura4, leitura5;
+    contQ = 0;
+    contV = 0;
     for (int c = 0; c < *nBarras; c++){
 
         fscanf(dadosBarras, "%d", &i);
@@ -28,34 +31,35 @@ barra** lerDadosBarras(char endereco[100], int* nBarras, int* nPQ, int* nPV){
         }
 
         fscanf(dadosBarras, "%d", &tipo);
-        fscanf(dadosBarras, "%lf", &vNominal);
-        fscanf(dadosBarras, "%lf", &leitura4);
-        fscanf(dadosBarras, "%lf", &leitura5);
+        fscanf(dadosBarras, "%lf", &Vnom);
+        fscanf(dadosBarras, "%lf", &leitura1);
+        fscanf(dadosBarras, "%lf", &leitura2);
 
         switch (tipo){
-            case 0: //É PQ
-                b[c] = newPQ((double)leitura4, (double)leitura5, vNominal);
-                q++;
-                break;
-
-            case 1: //É PV
-                b[c] = newPV((double)leitura4, (double)leitura5, vNominal);
-                v++;
-                break;
-
-            case 2: //É Swing
-                b[c] = newSwing((double)leitura4, (double)leitura5, vNominal);
-                break;
-
-            default:
-                printf("Erro na leitura do tipo de barra");
-                break;
+            if (tipo == 0)
+            {
+                b[c] = newPQ((double)leitura1, (double)leitura2, Vnom);
+                contQ++;
+            }
+            else if (tipo == 1)
+            {
+                b[c] = newPV((double)leitura1, (double)leitura2, Vnom);
+                contV++;
+            }
+            else if (tipo == 2)
+            {
+                b[c] = newSwing((double)leitura1, (double)leitura2, Vnom);
+            }
+            else
+            {
+                printf("Erro na leitura da matriz de Barras");
+            }
         }
     }
 
     fclose(dadosBarras);
-    *nPQ = q;
-    *nPV = v;
+    *nPQ = contQ;
+    *nPV = contV;
 
     return b;
 }
@@ -135,56 +139,40 @@ void getMatrizAdmitancia(double **B, double **G, int tam, char fileName[100]){
 }
 
 /**
-Preenche o vetor F dado um estado de barras previo
-
-obs: Assume que F tem tamanho 2n1 + n2
+Preenche o vetor F1 dado um estado de barras da rede 1
+      Fx tem tamanho 2n1 + n2
+obs:  Assume que a barra 0 eh tipo Swing
 **/
-void montaF(barra**b, int n1, int n2, int ordem,  double *F){
-    int k, j, w, nBarras;
+void termoConhecido(barra **b, int n1,int n2, double *Fx){
+    int j, k, nPV;
 
-    nBarras = n1 + n2 + 1;
-    //encontra a posição da barra PV e guarda em w.
-    for(int i = 0; i < nBarras; i++)
+    //Captura a posicao da barra PV
+    for(int i=0 ; i < n1 + n2 + 1; i++){
+        if(b[i]->tipo == 1)
+            nPV=i;
+    }
+
+    //Calcula a parte de FP de F
+    //Note que a barra swing nao contribui com o sistema de equacoes
+
+    for(int j=0; j<n1 + n2; j++)
     {
-        if(b[i]->tipo==1)
-            w=i;
-       // printf("%d\n", w);
+        Fx[j] = fp(j,b);
     }
-    //preenche a parte de FP de F
-    for(int i = 1;ordem<;i++)
+
+   //Calcula a parte de FQ de F
+    for(int j = n1+n2; j < 2*n1+n2; j++)
     {
-        F[j] = Fp(i,b);
-        j++;
+        Fx[j] = fq(j,b);
     }
 
 
-   //preenche a parte de FQ de F
-    for(int i = n1+n2+1;i<2*n1+n2+1;i++){
-
-       if(i>=w+(n1+n2))         //pula a PV
-            k = i-(n1+n2)+1;
-       else
-            k = i-(n1+n2);
-        F[j] = Fq(k,b);
-        j++;
-     //   printf ("k: %d\n", k);
-    }
-
-   for(int i =0;i<2*n1+n2;i++){
-        F[i] = -F[i];
-        printf("F[%d]: %lf\n", i, F[i]);
-    }
 }
 
-double** Jacobiana(int n1, int n2, barra* *b, double** condutancias, double** susceptancias) {
+void Jacobiana(double **J, int n1, int n2, barra* *b, double** condutancias, double** susceptancias) {
     int nBarras = n1+n2+1;
     int tamanhoJ = 2*n1 + n2;
 
-    double **J = malloc(tamanhoJ * sizeof(double*));
-
-    for (int i = 0; i < tamanhoJ; i++) {
-        J[i] = calloc(tamanhoJ, sizeof(double));
-    }
 
     //i -> coluna (vai pra direita)
     //j -> linha  (vai pra baixo)
@@ -194,12 +182,14 @@ double** Jacobiana(int n1, int n2, barra* *b, double** condutancias, double** su
     int limJ = n1 + n2;
     for (int j = 1; j <= limJ; j++) {
         for (int i = 1; i <= limI; i++) {
-            J[i-1][j-1] = Dfp_Dtetak(j, i, b, nBarras, condutancias, susceptancias);
+
+            J[i-1][j-1] = Dfp_Dtetak(i, j, b, condutancias, susceptancias);
+
             //printf("J[%d][%d] = %.3e\t", i-1, j-1, J[i-1][j-1]);
         }
         //printf("\n");
     }
-
+    printf("\ntudo ok...\n");
     //printf("\n\n");
 
     //2ª Parte
@@ -210,7 +200,7 @@ double** Jacobiana(int n1, int n2, barra* *b, double** condutancias, double** su
         int contaPQ = 0;
         for (int i = 0; i < limI; i++) {
             if (b[i]->tipo == 0) {
-                J[l+contaPQ][j-1] = Dfp_DVk(j, i, b, nBarras, condutancias, susceptancias);
+                J[l+contaPQ][j-1] = Dfp_DVk(j, i, b, condutancias, susceptancias);
                 //printf("J[%d][%d] = %.3e\t", l+contaPQ, j-1, J[l+contaPQ][j-1]);
                 contaPQ++;
             }
@@ -227,7 +217,7 @@ double** Jacobiana(int n1, int n2, barra* *b, double** condutancias, double** su
         int contaPQ = n1+n2;
         for (int j = 1; j <= limJ; j++) {
             if (b[j]->tipo == 0) {
-                J[i-1][contaPQ] = Dfq_Dthetak(j, i, b, nBarras, condutancias, susceptancias);
+                J[i-1][contaPQ] = Dfq_Dthetak(j, i, b, condutancias, susceptancias);
                 //printf("J[%d][%d] = %.3e\t", i-1, contaPQ, J[i-1][contaPQ]);
                 contaPQ++;
             }
@@ -246,7 +236,7 @@ double** Jacobiana(int n1, int n2, barra* *b, double** condutancias, double** su
         if (b[i]->tipo == 0) {
             for (int j = 1; j < limJ; j++) {
                 if(b[j]->tipo == 0){
-                    J[contaI+l][contaJ+l] = Dfq_DVk(j, i, b, nBarras, condutancias, susceptancias);
+                    J[contaI+l][contaJ+l] = Dfq_DVk(j, i, b, condutancias, susceptancias);
                     //printf("J[%d][%d] = %.3e\t", contaI+l, contaJ+l, J[contaI+l][contaJ+l]);
                     contaJ++;
                 }
@@ -256,9 +246,6 @@ double** Jacobiana(int n1, int n2, barra* *b, double** condutancias, double** su
             //printf("\n");
         }
     }
-
-    return J;
-
 
 }
 
