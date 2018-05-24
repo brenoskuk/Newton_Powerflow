@@ -34,7 +34,8 @@ typedef struct bar barra;
 barra* newPQ    (int indice, double ativa,   double reativa,  double vNom); //representa uma carga, impedância constante, injeção externa de potência = 0;
 barra* newPV    (int indice, double ativa,   double vNom); //representa um gerador;
 barra* newSwing (int indice, double V,  double fase  ,   double vNom);
-
+void copiaBarraPV (barra *b1, barra *b2);
+void copiaBarraPQ (barra *b1, barra *b2);
 
 double tensao(barra* b);
 

@@ -34,28 +34,33 @@ return 0;
 // Calcula a potencia ativa j como Re{S} usando as tensoes e fases calculadas
 void Pcal(int j, barra **b, int nBarras, double** G, double** B)
 {
+    //garante que apenas calcula Pcal para parras PV e PQ
     double sum = 0;
-    for(int k = 1; k < nBarras; k++)
+    if(b[j]->tipo != 2)
     {
-        sum = sum + ((tensao(b[k]))*(G[j][k]*cos(b[k]->fase-b[j]->fase) - B[j][k]*sin(b[k]->fase-b[j]->fase)));
+        for(int k = 0; k < nBarras; k++)
+        {
+            sum = sum + ((tensao(b[k]))*(G[j][k]*cos(b[k]->fase-b[j]->fase) - B[j][k]*sin(b[k]->fase-b[j]->fase)));
+        }
+        //Subtrai Pesp que eh zero se PQ
+        b[j]->ativaCalc = sum*tensao(b[j]);
     }
-    //Subtrai Pesp que eh zero se PQ
-    b[j]->ativaCalc = sum*tensao(b[j]) - b[j]->ativaEsp;
+
 }
 
 // Calcula a potencia aparente j como Im{S} usando as tensoes de fases calculadas
 void Qcal(int j, barra **b,  int nBarras, double** G, double** B)
  {
+    if(b[j]->tipo != 2){
+        double sum = 0;
 
-    double sum = 0;
+        for(int k = 1; k < nBarras; k++)
+        {
+                sum = sum + ((tensao(b[k]))*(G[j][k]*sin(b[k]->fase-b[j]->fase) + B[j][k]*cos(b[k]->fase-b[j]->fase)));
+        }
 
-    for(int k = 1; k < nBarras; k++)
-    {
-            sum = sum + ((tensao(b[k]))*(G[j][k]*sin(b[k]->fase-b[j]->fase) + B[j][k]*cos(b[k]->fase-b[j]->fase)));
+        b[j]->reativaCalc = -sum*tensao(b[j]);
     }
-
-    b[j]->reativaCalc = -sum*tensao(b[j]);
-
 }
 
 //Calcula a derivada parcial del(fpj)/del(tetak)

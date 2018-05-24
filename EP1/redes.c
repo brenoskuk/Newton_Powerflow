@@ -24,40 +24,36 @@ barra** lerDadosBarras(char endereco[100], int* nBarras, int* nPQ, int* nPV, int
 
     contQ = 0;
     contV = 0;
-    for (int c = 0; c < *nBarras; c++){
+    while(!feof(dadosBarras)){
 
         fscanf(dadosBarras, "%d", &i);
-        if (i != c){
-            printf("Erro !");
-        }
-
         fscanf(dadosBarras, "%d", &tipo);
         fscanf(dadosBarras, "%lf", &Vnom);
         fscanf(dadosBarras, "%lf", &leitura1);
         fscanf(dadosBarras, "%lf", &leitura2);
         if (tipo == 0)
         {
-            b[c] = newPQ(i,leitura1, leitura2, Vnom);
+            b[i] = newPQ(i,leitura1, leitura2, Vnom);
             contQ++;
         }
         else if (tipo == 1)
         {
-            linPv = c;
-            b[c] = newPV(i,leitura1, Vnom);
+            linPv = i;
+            b[i] = newPV(i,leitura1, Vnom);
             contV++;
         }
         else if (tipo == 2)
         {
-            linSW = c;
-            b[c] = newSwing(i,leitura1, leitura2, Vnom);
+            linSW = i;
+            b[i] = newSwing(i,leitura1, leitura2, Vnom);
         }
         else
         {
             printf("Erro na leitura da matriz de Barras");
         }
 
-    }
 
+    }
     fclose(dadosBarras);
 
     *nPQ = contQ;
@@ -79,12 +75,17 @@ barra** reorganizaBarras(barra **b, int nBarras)
     //br tem o tamanho de nBarras - 1 pois exclui Swing
     br = malloc((nBarras-1) * sizeof(barra*));
     k=0;
+    temp = -1;
     for(i=0; i<nBarras; i++)
     {
         //barra do tipo PQ vai para a posicao k de br
         if (b[i]->tipo == 0)
         {
             br[k] = newPQ(b[i]->indice, b[i]->ativaNom, b[i]->reativaNom, b[i]->vnominal);
+            br[k]->ativaCalc = b[i]->ativaCalc;
+            br[k]->reativaCalc = b[i]->reativaCalc;
+            br[k]->V = b[i]->V;
+            br[k]->fase=b[i]->fase;
             k++;
         }
         //guarda a posicao
@@ -92,10 +93,17 @@ barra** reorganizaBarras(barra **b, int nBarras)
         {
             temp = b[i]->indice;
         }
-        //ignora barra SWING
     }
-    //guarda PV
-    br[k]=newPV(b[temp]->indice, b[temp]->ativaNom, b[temp]->vnominal);
+    //guarda PV se existe
+    if(temp != -1)
+    {
+        br[k]=newPV(b[temp]->indice, b[temp]->ativaNom, b[temp]->vnominal);
+        br[k]->ativaCalc=b[temp]->ativaCalc;
+        br[k]->fase=b[temp]->fase;
+        br[k]->V=b[temp]->V;
+        br[k]->reativaCalc=b[temp]->reativaCalc;
+    }
+
     return br;
 }
 /**
@@ -152,20 +160,17 @@ void termoConhecido(barra **b, int n1,int n2, double *Fx){
     centro = n1 + n2;
     //Calcula a parte de FP de F
     //Note que a barra swing nao contribui com o sistema de equacoes
-
-    for(j=0; j <= centro; j++)
+    for(j=0; j < centro; j++)
     {
         Fx[j] = fp(j,b);
     }
-
-     k=1;
+    k=0;
    //Calcula a parte de FQ de F
-    for(j = centro; j <= centro + n1 ; j++)
+    for(j = centro; j < centro + n1; j++)
     {
         Fx[j] = fq(k,b);
         k++;
     }
-
 
 }
 
@@ -181,9 +186,9 @@ void Jacobiana(double **J, int n1, int n2, barra **b, double **G, double **B) {
 
 
     //Sao as derivadas parciais fpj com relacao a thetak
-    for ( j = 0; j <= centro; j++)
+    for ( j = 0; j < centro; j++)
     {
-        for (int k = 1; k <= centro; k++)
+        for (int k = 0; k < centro ; k++)
         {
             J[j][k] = Dfpj_Dtetak(j, k, b, G, B);
         }
@@ -191,33 +196,33 @@ void Jacobiana(double **J, int n1, int n2, barra **b, double **G, double **B) {
     //Calcula o segundo "quadrante" do Jacobiano
 
     //Sao as derivadas parciais fpj com relacao a Vk
-    for (int j = centro; j <= centro + n1; j++)
+    for (int j = centro ; j < centro + n1; j++)
     {
-        for (int k = 1; k <= centro; k++)
+        for (int k = 0; k < centro; k++)
         {
-            J[j-1][k-1] = Dfpj_DVk(j-centro, k, b, G, B);
+            J[j][k] = Dfpj_DVk(j-centro, k, b, G, B);
         }
     }
 
     //Calcula o terceiro "quadrante" do Jacobiano
 
     //Sao as derivadas parciais fqj com relacao a Thetak
-    for (int j = 1; j <= centro; j++)
+    for (int j = 0; j < centro; j++)
     {
-        for (int k = centro; k <= centro + n1; k++)
+        for (int k = centro; k < centro + n1; k++)
         {
-            J[j-1][k-1] = Dfqj_Dthetak(j, k - centro, b, G, B);
+            J[j][k] = Dfqj_Dthetak(j, k - centro, b, G, B);
         }
     }
 
     //Calcula o quarto "quadrante" do Jacobiano
 
     //Sao as derivadas parciais fqj com relacao a Vk
-    for (int j = centro; j <= centro + n1; j++)
+    for (int j = centro; j < centro + n1; j++)
     {
-        for (int k = centro; k <= centro + n1; k++)
+        for (int k = centro; k < centro + n1; k++)
         {
-            J[j-1][k-1] = Dfqj_DVk(j-centro, k-centro, b, G, B);
+            J[j][k] = Dfqj_DVk(j-centro, k-centro, b, G, B);
         }
     }
 

@@ -33,11 +33,11 @@ void iteracaoNewton (double **J, double *Fx, double *X, double *C, int n)
 
 /**
 Dado o Jacobiano e os valores da funcao no ponto F(X),
-um vetor de barras b, um erro eps e um numero maximo de imax
+um vetor de barras b, um erro eps
 roda uma iteracao do metodo de newton N dimensional
 para o caso das questoes de rede
 **/
-void iteracaoNewtonBarra (double **J, double *Fx, barra **b, double *C, int n1, int n2)
+void iteracaoNewtonBarra (double **J, double *Fx, barra **br, barra **b, double *C, int n1, int n2)
 {
     int *P, i, j, centro;
     centro = n1 + n2;
@@ -53,28 +53,20 @@ void iteracaoNewtonBarra (double **J, double *Fx, barra **b, double *C, int n1, 
     resolveSisLinPermutado(J, Fx, C, P, centro + n1);
     //Resolve Xprox = X + C para i = 0 ate n1 + n2 (Theta1)
     //Lembrar que a barra de swing ocupa b[0]!!!
+
+    int index;
     for(i=0; i < centro; i++)
     {
-        b[i+1]->fase = b[i+1]->fase + C[i];
+        index = br[i]->indice;
+        b[index]->fase = b[index]->fase + C[i];
     }
     //Resolve Xprox = X + C para i = 0 ate n1 + n2 (V)
     for(i=centro; i < centro + n1; i++)
     {
-        b[i - centro + 1]->V = b[i - centro + 1]->V + C[i];
+        index = br[i - centro]->indice;
+        b[index]->V = b[index]->V + C[i];
     }
 
-    //Zera o vetor J
-    for(i=0;i<2*n1 + n2;i++)
-    {
-        for(j=0; j<2*n1 + n2; j++)
-        {
-            J[i][j] = 0;
-        }
-    }
-    //Zera o vetor F
-    for(j=0; j<2*n1 + n2; j++)
-    {
-        Fx[j] = 0;
-    }
+
     free(P);
 }

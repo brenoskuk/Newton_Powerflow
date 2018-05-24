@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include "math.h"
 #include "barras.h"
 /**
 A construcao do struct barra determina as condicoes inciais
@@ -13,21 +14,21 @@ barra* newPQ    (int indice, double ativa,   double reativa,  double vNom){
     barra* p = malloc(sizeof(barra));
 
     //ativaEsp e reativaEsp sao nulos
-    p->ativaEsp     = 0;
-    p->reativaEsp   = 0;
+    p->ativaEsp     = ativa;
+    p->reativaEsp   = reativa;
 
     p->ativaNom     = ativa;
     p->reativaNom   = reativa;
 
     p->vnominal     = vNom;
 
-    p->ativaCalc    = ativa;
-    p->reativaCalc  = reativa;
+    p->ativaCalc    = 0;
+    p->reativaCalc  = 0;
 
     //Condicoes iniciais
     p->fase         = 0;
     p->V            = vNom;
-
+    p->indice       = indice;
     p->tipo         = 0;
 
     return p;
@@ -46,7 +47,7 @@ barra* newPV    (int indice, double ativa, double vNom){
 
     p->fase         = 0;
     p->tipo         = 1;
-
+    p->indice       = indice;
     return p;
 }
 
@@ -58,8 +59,9 @@ barra* newSwing (int indice, double V,  double fase  ,  double vNom){
     p->vnominal = vNom;
 
     p->tipo     = 2;
-
+    p->indice       = indice;
     return p;
 }
+
 
 

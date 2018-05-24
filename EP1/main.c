@@ -42,10 +42,7 @@ int main()
     // ordem en n1 + n2
     //montaMatrizQuadrada(enderecoRede, &ordem);
     b = lerDadosBarras( enderecoRede1Barras, &btamanho, &nPQ, &nPV ,&posPV, &posSW);
-    br = reorganizaBarras(b, btamanho);
-
     tam = 2*nPQ + nPV;
-
 
     //aloca as matrizes e vetores que serao utilizados
     //tam eh 2n1 + n2 ... ordem eh n1 + n2
@@ -75,31 +72,45 @@ int main()
 
     getMatrizAdmitancia(G, B, btamanho, enderecoRede1Y);
 
-    //O struct barra inicializa as barras nas condicoes inciais
 
+    for(i=0; i<btamanho; i++)
+    {
+        for(j=0; j<btamanho; j++)
+            printf("%9.5lf ", G[i][j]);
+        printf("\n");
+    }
+
+
+    //O struct barra inicializa as barras nas condicoes inciais
+    //Calcula Pesp e Qesp com base nos valores atuais
+    for(j=0; j< btamanho; j++)
+    {
+        Pcal(j, b, btamanho, G, B);
+        Qcal(j, b, btamanho, G, B);
+    }
 
     parada = 0;
     k = 0;
     while ((parada == 0)&&(k < maxIteracoes))
     {
-        //Calcula Pesp e Qesp com base nos valores atuais
+        br = reorganizaBarras(b, btamanho);
+
+        //Calcula o termo conhecido rearranjado:
+        termoConhecido(br, nPQ, nPV, Fx);
+
+        //Calcula o Jacobiano rearranjado
+        Jacobiana(J, nPQ, nPV, br , G, B);
+        //Resolve uma iteracao do metodo de newton
+        iteracaoNewtonBarra(J, Fx, br, b, C, nPQ, nPV);
+
+        double guarda = fp(3,b);
+        //Atualiza Pcal e Qcal
         for(j=0; j< btamanho; j++)
         {
             Pcal(j, b, btamanho, G, B);
             Qcal(j, b, btamanho, G, B);
         }
-
-        printf("oi");
-        //Calcula o termo conhecido:
-        termoConhecido(br, nPQ, nPV, Fx);
-        printf("oi");
-        //Calcula o Jacobiano
-        Jacobiana(J, nPQ, nPV, br , G, B);
-
-        printf("oi");
-        //Resolve uma iteracao do metodo de newton
-        iteracaoNewtonBarra(J, Fx, br, C, nPQ, nPV);
-
+        printf("diff = %lf\n",guarda - fp(3,b));
         //Captura o maior modulo de residuo
         maxC = fabs(C[0]);
         for (i=0; i<tam; i++)
@@ -125,7 +136,7 @@ int main()
     printf("\n[tensoes]: \n");
     for(i=0; i<btamanho; i++)
     {
-        printf("%d : %9.5lf /_ %9.5lf \n",i ,b[i]->V, b[i]->fase);
+        printf("%d : %9.5lf /_ %9.5lf \n",i ,tensao(b[i]), b[i]->fase);
     }
     printf("\n");
 
